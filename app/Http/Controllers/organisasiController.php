@@ -47,25 +47,12 @@ class organisasiController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('id', $request->id);
         Session::flash('nama_organisasi', $request->nama_organisasi);
         Session::flash('jabatan', $request->jabatan);
         Session::flash('tahun_awal', $request->tahun_awal);
         Session::flash('tahun_akhir', $request->tahun_akhir);
 
-        $validator = Validator::make($request->all(), [
-            'id' => 'unique:identitas' 
-        ], [
-            'id.unique' => 'ID sudah ada dalam database. Pilih ID yang berbeda.'
-        ]);
-        
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $data = [
-            'id' => $request->id,
             'nama_organisasi' => $request->nama_organisasi,
             'jabatan' => $request->jabatan,
             'tahun_awal' => $request->tahun_awal,

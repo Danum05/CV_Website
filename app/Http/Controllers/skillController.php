@@ -46,24 +46,10 @@ class skillController extends Controller
      */
     public function store(Request $request)
     {
-    Session::flash('id', $request->id);
     Session::flash('nama_skill', $request->nama_skill);
-    Session::flash('persen_skill', $request->persen_skill);
-
-    $validator = Validator::make($request->all(), [
-        'id' => 'unique:skill' 
-    ], [
-        'id.unique' => 'ID sudah ada dalam database. Pilih ID yang berbeda.'
-    ]);
-    
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-    
+    Session::flash('persen_skill', $request->persen_skill);    
 
     $data = [
-        'id' => $request->id,
         'nama_skill' => $request->nama_skill,
         'persen_skill' => $request->persen_skill,
     ];
@@ -93,7 +79,7 @@ public function show($id)
 public function edit($id)
 {
     $data = skill::where('id', $id)->first(); 
-    return view('portofolio.edit')->with('data', $data); 
+    return view('skill.edit')->with('data', $data); 
 }
 
 /**

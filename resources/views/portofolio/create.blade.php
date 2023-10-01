@@ -6,15 +6,6 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url('portofolio') }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
-            <label for="id" class="col-sm-2 col-form-label">ID</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control @error('id') is-invalid @enderror" name='id' value="{{ old('id', Session::get('id')) }}" id="id">
-                @error('id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama Proyek</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name='nama_proyek' value="{{ Session::get('nama_proyek') }}" id="nama_proyek">

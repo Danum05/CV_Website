@@ -25,8 +25,6 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>ID</th>
                     <th>Nama Organisasi</th>
                     <th>Jabatan</th>
                     <th>Tahun Awal</th>
@@ -35,11 +33,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = $data->firstItem() ?>
                 @foreach ($data as $item)
                 <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $item->id }}</td>
                     <td>{{ $item->nama_organisasi }}</td>
                     <td>{{ $item->jabatan }}</td>
                     <td>{{ $item->tahun_awal }}</td>
@@ -53,7 +48,6 @@
                         </form>
                     </td>
                 </tr>
-                <?php $i++ ?>
                 @endforeach
             </tbody>
         </table>

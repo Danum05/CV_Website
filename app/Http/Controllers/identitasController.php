@@ -50,7 +50,6 @@ class identitasController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('id', $request->id);
         Session::flash('nama', $request->nama);
         Session::flash('tempat_lahir', $request->tempat_lahir);
         Session::flash('tanggal_lahir', $request->tanggal_lahir);
@@ -59,24 +58,12 @@ class identitasController extends Controller
         Session::flash('kewarganegaraan', $request->kewarganegaraan);
         Session::flash('status', $request->status);
 
-        $validator = Validator::make($request->all(), [
-            'id' => 'unique:identitas' 
-        ], [
-            'id.unique' => 'ID sudah ada dalam database. Pilih ID yang berbeda.'
-        ]);
-        
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $foto_file = $request->file('pas_foto');
         $foto_ekstensi = $foto_file->extension();
         $foto_nama = date('ymdhis') . '.' . $foto_ekstensi;
         $foto_file->move(public_path('pas_foto'), $foto_nama);
 
         $data = [
-            'id' => $request->id,
             'nama' => $request->nama,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,

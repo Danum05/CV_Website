@@ -6,36 +6,27 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("pendidikan") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
-            <label for="id" class="col-sm-2 col-form-label">ID</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control @error('id') is-invalid @enderror" name='id' value="{{ old('id', Session::get('id')) }}" id="id">
-                @error('id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama Instansi</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name='nama_instansi' value="{{ Session::get('nama_instansi') }}" id="nama_instansi">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="tempat_lahir" class="col-sm-2 col-form-label">Nama Jurusan</label>
+            <label for="nama_jurusan" class="col-sm-2 col-form-label">Nama Jurusan</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name='nama_jurusan' value="{{ Session::get('nama_jurusan') }}" id="nama_jurusan">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tahun Masuk</label>
+            <label for="tahun_masuk" class="col-sm-2 col-form-label">Tahun Masuk</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='tahun_masuk' value="{{ Session::get('tahun_masuk') }}" id="tahun_masuk">
+                <input type="number" class="form-control" name='tahun_masuk' value="{{ Session::get('tahun_masuk') }}" id="tahun_masuk">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tahun keluar</label>
+            <label for="tahun_lulus" class="col-sm-2 col-form-label">Tahun Lulus</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='tahun_lulus' value="{{ Session::get('tahun_lulus') }}" id="tahun_lulus">
+                <input type="number" class="form-control" name='tahun_lulus' value="{{ Session::get('tahun_lulus') }}" id="tahun_lulus">
             </div>
         </div>
         <div class="mb-3 row">

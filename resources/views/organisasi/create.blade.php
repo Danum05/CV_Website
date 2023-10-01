@@ -4,7 +4,7 @@
 <form action='{{ url('organisasi') }}' method='post' enctype="multipart/form-data">
     @csrf 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-        
+        <a href='{{ url("organisasi") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
             <label for="nama_organisasi" class="col-sm-2 col-form-label">Nama Organisasi</label>
             <div class="col-sm-10">
@@ -20,7 +20,7 @@
         <div class="mb-3 row">
             <label for="tahun_awal" class="col-sm-2 col-form-label">Tahun Awal</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='tahun_awal' value="{{ Session::get('tahun_awal') }}" id="tahun_awal">
+                <input type="number" class="form-control" name='tahun_awal' value="{{ Session::get('tahun_awal') }}" id="tahun_awal">
             </div>
         </div>
         <div class="mb-3 row">

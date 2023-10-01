@@ -6,15 +6,6 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("identitas") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
-            <label for="id" class="col-sm-2 col-form-label">ID</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control @error('id') is-invalid @enderror" name='id' value="{{ old('id', Session::get('id')) }}" id="id">
-                @error('id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name='nama' value="{{ Session::get('nama') }}" id="nama">
@@ -35,15 +26,23 @@
         <div class="mb-3 row">
             <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='jenis_kelamin' value="{{ Session::get('jenis_kelamin') }}" id="jenis_kelamin">
+                <select class="form-control" name='jenis_kelamin' id="jenis_kelamin">
+                    <option value="Laki-Laki" {{ Session::get('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                    <option value="Perempuan" {{ Session::get('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                </select>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="agama" class="col-sm-2 col-form-label">Agama</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='agama' value="{{ Session::get('agama') }}" id="agama">
+                <select class="form-control" name="agama" id="agama">
+                    <option value="Islam" {{ Session::get('agama') == 'Islam' ? 'selected' : '' }}>Islam</option>
+                    <option value="Kristen" {{ Session::get('agama') == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                    <option value="Hindu" {{ Session::get('agama') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                    <option value="Buddha" {{ Session::get('agama') == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                </select>
             </div>
-        </div>
+        </div>        
         <div class="mb-3 row">
             <label for="kewarganegaraan" class="col-sm-2 col-form-label">Kewarganegaraan</label>
             <div class="col-sm-10">
@@ -53,7 +52,10 @@
         <div class="mb-3 row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='status' value="{{ Session::get('status') }}" id="status">
+                <select class="form-control" name="status" id="status">
+                    <option value="Menikah" {{ Session::get('status') == 'Menikah' ? 'selected' : '' }}>Menikah</option>
+                    <option value="Belum Menikah" {{ Session::get('status') == 'Belum Menikah' ? 'selected' : '' }}>Belum Menikah</option>
+                </select>
             </div>
         </div>
         <div class="mb-3 row">

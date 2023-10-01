@@ -7,6 +7,10 @@ use App\Http\Controllers\organisasiController;
 use App\Http\Controllers\pendidikanController;
 use App\Http\Controllers\portofolioController;
 use App\Http\Controllers\skillController;
+use App\Http\Controllers\danuController;
+use App\Http\Controllers\rahmaController;
+use App\Http\Controllers\reihanController;
+use App\Http\Controllers\yasminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +38,7 @@ Route::get('login', [loginController::class, 'index']);
 Route::post('login', [loginController::class, 'processLogin']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/landing-page', [landingpageController::class, 'index']);
+Route::get('/danu-dashboard', [DanuController::class, 'index']); 
+Route::get('/rahma-dashboard', [RahmaController::class, 'index']);
+Route::get('/reihan-dashboard', [ReihanController::class, 'index']); 
+Route::get('/yasmin-dashboard', [YasminController::class, 'index']);

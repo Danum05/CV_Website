@@ -25,19 +25,14 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>ID</th>
                     <th>Skill</th>
                     <th>Persentase</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <?php $i = $data->firstItem() ?>
                 @foreach ($data as $item)
                 <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $item->id }}</td>
                     <td>{{ $item->nama_skill }}</td>
                     <td>{{ $item->persen_skill }}</td>
                     <td>
@@ -49,7 +44,6 @@
                         </form>
                     </td>
                 </tr>
-                <?php $i++ ?>
                 @endforeach
             </tbody>
         </table>

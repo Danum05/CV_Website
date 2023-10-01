@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Controller;
 
 class loginController extends Controller
 {
+    
     public function index(Request $request)
     {
         return view('login.index');
     }
 
-    function processLogin(Request $request)
+    public function processLogin(Request $request)
     {
-        Session::put('email', $request->input('email'));
-
         $request->validate([
             'email' => 'required',
             'password' => 'required'
@@ -24,21 +25,45 @@ class loginController extends Controller
             'email.required' => 'Email wajib diisi',
             'password.required' => 'Password wajib diisi'
         ]);
-
+    
         $infologin = [
             'email' => $request->email,
             'password' => $request->password
         ];
-
+    
         if (Auth::attempt($infologin)) {
-            return redirect('identitas')->with('success', 'Berhasil login');
+            // Jika berhasil login, Anda dapat memeriksa email untuk menentukan redirect
+            switch (Auth::user()->email) {
+                case 'admin@gmail.com':
+                    return redirect('/identitas')->with('success', 'Berhasil login');
+                    break;
+    
+                case 'danu@gmail.com':
+                    return redirect('/danu-dashboard')->with('success', 'Berhasil login');
+                    break;
+        
+                case 'rahma@gmail.com':
+                    return redirect('/rahma-dashboard')->with('success', 'Berhasil login');
+                    break;
+
+                case 'reihan@gmail.com':
+                    return redirect('/reihan-dashboard')->with('success', 'Berhasil login');
+                    break;
+            
+                case 'yasmin@gmail.com':
+                    return redirect('/yasmin-dashboard')->with('success', 'Berhasil login');
+                    break;
+
+                default:
+                    return redirect('/login');
+            }
         } else {
             return redirect('login')
                 ->withErrors([
-                    'loginError' => 'email dan password yang dimasukkan tidak sesuai. Pastikan Anda memasukkan informasi yang benar.'
+                    'loginError' => 'Email dan password yang dimasukkan tidak sesuai. Pastikan Anda memasukkan informasi yang benar.'
                 ]);
         }
-    }
+    }    
 
     public function logout()
     {

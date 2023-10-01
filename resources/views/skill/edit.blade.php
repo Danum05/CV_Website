@@ -7,12 +7,6 @@
 @method('PUT')
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     <a href='{{ url('skill') }}' class="btn btn-secondary"><< kembali</a>
-    <div class="mb-3 row">
-        <label for="id" class="col-sm-2 col-form-label">ID</label>
-        <div class="col-sm-10">
-            {{ $data->id }}
-        </div>
-    </div>
         <div class="mb-3 row">
             <label for="skill" class="col-sm-2 col-form-label">Skill</label>
             <div class="col-sm-10">

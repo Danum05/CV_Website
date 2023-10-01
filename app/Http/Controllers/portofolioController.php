@@ -45,20 +45,9 @@ class portofolioController extends Controller
      */
     public function store(Request $request)
     {
-    Session::flash('id', $request->id);
     Session::flash('nama_proyek', $request->nama_proyek);
     Session::flash('deskripsi', $request->deskripsi);
 
-    $validator = Validator::make($request->all(), [
-        'id' => 'unique:portofolio' 
-    ], [
-        'id.unique' => 'ID sudah ada dalam database. Pilih ID yang berbeda.'
-    ]);
-    
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
     // Periksa apakah file telah diunggah
     if ($request->hasFile('foto_proyek')) {
         $foto_file = $request->file('foto_proyek');
@@ -71,7 +60,6 @@ class portofolioController extends Controller
     }
 
     $data = [
-        'id' => $request->id,
         'nama_proyek' => $request->nama_proyek,
         'deskripsi' => $request->deskripsi,
         'foto_proyek' => $foto_nama

@@ -47,25 +47,12 @@ class pendidikanController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('id', $request->id);
         Session::flash('nama_instansi', $request->nama_instansi);
         Session::flash('nama_jurusan', $request->nama_jurusan);
         Session::flash('tahun_masuk', $request->tahun_masuk);
         Session::flash('tahun_lulus', $request->tahun_lulus);
 
-        $validator = Validator::make($request->all(), [
-            'id' => 'unique:identitas' 
-        ], [
-            'id.unique' => 'ID sudah ada dalam database. Pilih ID yang berbeda.'
-        ]);
-        
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $data = [
-            'id' => $request->id,
             'nama_instansi' => $request->nama_instansi,
             'nama_jurusan' => $request->nama_jurusan,
             'tahun_masuk' => $request->tahun_masuk,
