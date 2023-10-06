@@ -9,7 +9,7 @@
     @endif
     <!-- FORM PENCARIAN -->
     <div class="pb-3">
-        <form class="d-flex" action="{{ url('identitas') }}" method="get">
+        <form class="d-flex" action="{{ url('kontak') }}" method="get">
             <input class="form-control me-1" type="search" name="katakunci" value="{{ Request::get('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
             <button class="btn btn-secondary" type="submit">Cari</button>
         </form>
@@ -17,7 +17,7 @@
     
     <!-- TOMBOL TAMBAH DATA -->
     <div class="pb-3">
-        <a href='{{ url('identitas/create') }}' class="btn btn-primary">+ Tambah Data</a>
+        <a href='{{ url('kontak/create') }}' class="btn btn-primary">+ Tambah Data</a>
     </div>
     
     <!-- TABEL DATA -->
@@ -25,35 +25,21 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Nama</th>
-                    <th>Pekerjaan</th>
-                    <th>Tempat Lahir</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Agama</th>
-                    <th>Kewarganegaraan</th>
-                    <th>Status</th>
-                    <th>Pas Foto</th>
+                    <th>Email</th>
+                    <th>Alamat</th>
+                    <th>No Telepon</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $item)
                 <tr>
-                    <td>{{ $item->nama }}</td>
-                    <td>{{ $item->pekerjaan }}</td>
-                    <td>{{ $item->tempat_lahir }}</td>
-                    <td>{{ $item->tanggal_lahir }}</td>
-                    <td>{{ $item->jenis_kelamin }}</td>
-                    <td>{{ $item->agama }}</td>
-                    <td>{{ $item->kewarganegaraan }}</td>
-                    <td>{{ $item->status }}</td>
+                    <td>{{ $item->email }}</td>
+                    <td>{{ $item->alamat }}</td>
+                    <td>{{ $item->no_telepon }}</td>
                     <td>
-                        <img src="{{ asset('pas_foto/' . $item->pas_foto) }}" alt="Foto" style="max-width: 50px; max-height: 50px;">
-                    </td>
-                    <td>
-                        <a href='{{ url('identitas/'.$item->id.'/edit') }}' class="btn btn-warning btn-sm">Edit</a>
-                        <form onsubmit="return confirm('Yakin akan menghapus data?')" class='d-inline' action="{{ url('identitas/'.$item->id) }}" method="post">
+                        <a href='{{ url('kontak/'.$item->id.'/edit') }}' class="btn btn-warning btn-sm">Edit</a>
+                        <form onsubmit="return confirm('Yakin akan menghapus data?')" class='d-inline' action="{{ url('kontak/'.$item->id) }}" method="post">
                             @csrf 
                             @method('DELETE')
                             <button type="submit" name="submit" class="btn btn-danger btn-sm">Del</button>

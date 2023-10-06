@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pendidikan', function (Blueprint $table) {
-            $table->string('id');
-            $table->unique('id');
+        Schema::create('pendidikans', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('identitas_id')->constrained(); // Menambahkan foreign key ke tabel identitas
             $table->string('nama_instansi');
             $table->string('nama_jurusan');
-            $table->string('tahun_masuk');
-            $table->string('tahun_lulus');
+            $table->year('tahun_masuk');
+            $table->year('tahun_lulus');
+            $table->timestamps();
         });
     }
 

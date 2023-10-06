@@ -72,6 +72,9 @@
                 <div class="navbar-nav w-100">
                     <a href="{{ url('skill') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Skill</a>
                 </div>
+                <div class="navbar-nav w-100">
+                    <a href="{{ url('kontak') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Kontak</a>
+                </div>
             </nav>
         </div>
         <!-- Sidebar End -->
