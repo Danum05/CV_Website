@@ -52,6 +52,19 @@ class organisasiController extends Controller
         Session::flash('tahun_awal', $request->tahun_awal);
         Session::flash('tahun_akhir', $request->tahun_akhir);
 
+        $validator = Validator::make($request->all(), [
+            'nama_organisasi' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'jabatan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'tahun_awal' => 'required|digits:4|integer',
+            'tahun_akhir' => 'required|digits:4|integer|gt:tahun_awal',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect("organisasi/create")
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $data = [
             'nama_organisasi' => $request->nama_organisasi,
             'jabatan' => $request->jabatan,
@@ -94,6 +107,23 @@ public function edit($id)
  */
 public function update(Request $request, $id)
 {
+    Session::flash('nama_organisasi', $request->nama_organisasi);
+    Session::flash('jabatan', $request->jabatan);
+    Session::flash('tahun_awal', $request->tahun_awal);
+    Session::flash('tahun_akhir', $request->tahun_akhir);
+
+    $validator = Validator::make($request->all(), [
+        'nama_organisasi' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'jabatan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'tahun_awal' => 'required|digits:4|integer',
+        'tahun_akhir' => 'required|digits:4|integer|gt:tahun_awal',
+    ]);
+    
+    if ($validator->fails()) {
+        return redirect("organisasi/{$id}/edit")
+                    ->withErrors($validator)
+                    ->withInput();
+    }
     $data = [
         'nama_organisasi' => $request->nama_organisasi,
         'jabatan' => $request->jabatan,

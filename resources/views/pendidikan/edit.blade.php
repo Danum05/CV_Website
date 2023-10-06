@@ -4,6 +4,15 @@
 
 <form action='{{ url('pendidikan/'.$data->id) }}' method='post' enctype="multipart/form-data">
 @csrf 
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif 
 @method('PUT')
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     <a href='{{ url('pendidikan') }}' class="btn btn-secondary"><< kembali</a>
@@ -16,7 +25,7 @@
         <div class="mb-3 row">
             <label for="nama_jurusan" class="col-sm-2 col-form-label">Nama Jurusan</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='nama_jurusan' value="{{ Session::get('nama_jurusan') }}" id="nama_jurusan">
+                <input type="text" class="form-control" name='nama_jurusan' value="{{ Session::get('nama_jurusan') }}" id="nama_jurusan">
             </div>
         </div>
         <div class="mb-3 row">

@@ -52,15 +52,29 @@ class pendidikanController extends Controller
         Session::flash('tahun_masuk', $request->tahun_masuk);
         Session::flash('tahun_lulus', $request->tahun_lulus);
 
+        $validator = Validator::make($request->all(), [
+            'nama_instansi' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'nama_jurusan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'tahun_masuk' => 'required|digits:4|integer',
+            'tahun_lulus' => 'required|digits:4|integer|gt:tahun_masuk',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect("pendidikan/create")
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $data = [
             'nama_instansi' => $request->nama_instansi,
             'nama_jurusan' => $request->nama_jurusan,
             'tahun_masuk' => $request->tahun_masuk,
             'tahun_lulus' => $request->tahun_lulus,
         ];
-
+    
         Pendidikan::create($data); 
-        return redirect()->to('pendidikan')->with('success', 'Berhasil menambahkan data'); 
+    
+        return redirect()->to('pendidikan')->with('success', 'Berhasil menambahkan data pendidikan'); 
     }
     /**
  * Display the specified resource.
@@ -94,6 +108,24 @@ public function edit($id)
  */
 public function update(Request $request, $id)
 {
+    Session::flash('nama_instansi', $request->nama_instansi);
+    Session::flash('nama_jurusan', $request->nama_jurusan);
+    Session::flash('tahun_masuk', $request->tahun_masuk);
+    Session::flash('tahun_lulus', $request->tahun_lulus);
+
+    $validator = Validator::make($request->all(), [
+        'nama_instansi' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'nama_jurusan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'tahun_masuk' => 'required|digits:4|integer',
+        'tahun_lulus' => 'required|digits:4|integer|gt:tahun_masuk',
+    ]);
+    
+    if ($validator->fails()) {
+        return redirect("pendidikan/{$id}/edit")
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+
     $data = [
         'nama_instansi' => $request->nama_instansi,
         'nama_jurusan' => $request->nama_jurusan,
