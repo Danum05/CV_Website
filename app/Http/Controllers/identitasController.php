@@ -51,6 +51,7 @@ class identitasController extends Controller
     public function store(Request $request)
     {
         Session::flash('nama', $request->nama);
+        Session::flash('pekerjaan', $request->pekerjaan);
         Session::flash('tempat_lahir', $request->tempat_lahir);
         Session::flash('tanggal_lahir', $request->tanggal_lahir);
         Session::flash('jenis_kelamin', $request->jenis_kelamin);
@@ -62,9 +63,27 @@ class identitasController extends Controller
         $foto_ekstensi = $foto_file->extension();
         $foto_nama = date('ymdhis') . '.' . $foto_ekstensi;
         $foto_file->move(public_path('pas_foto'), $foto_nama);
+        
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'pekerjaan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'tempat_lahir' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+            'agama' => 'required|string|max:255',
+            'kewarganegaraan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'status' => 'required|string|max:255',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect('identitas/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $data = [
             'nama' => $request->nama,
+            'pekerjaan' => $request->pekerjaan,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -109,8 +128,35 @@ public function edit($id)
  */
 public function update(Request $request, $id)
 {
+    Session::flash('nama', $request->nama);
+    Session::flash('pekerjaan', $request->pekerjaan);
+    Session::flash('tempat_lahir', $request->tempat_lahir);
+    Session::flash('tanggal_lahir', $request->tanggal_lahir);
+    Session::flash('jenis_kelamin', $request->jenis_kelamin);
+    Session::flash('agama', $request->agama);
+    Session::flash('kewarganegaraan', $request->kewarganegaraan);
+    Session::flash('status', $request->status);
+    
+    $validator = Validator::make($request->all(), [
+        'nama' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'pekerjaan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'tempat_lahir' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'tanggal_lahir' => 'required|date',
+        'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+        'agama' => 'required|string|max:255',
+        'kewarganegaraan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'status' => 'required|string|max:255',
+    ]);
+    
+    if ($validator->fails()) {
+        return redirect("identitas/{$id}/edit")
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+    
     $data = [
         'nama' => $request->nama,
+        'pekerjaan' => $request->pekerjaan,
         'tempat_lahir' => $request->tempat_lahir,
         'tanggal_lahir' => $request->tanggal_lahir,
         'jenis_kelamin' => $request->jenis_kelamin,

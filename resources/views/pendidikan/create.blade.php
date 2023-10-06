@@ -2,7 +2,16 @@
 
 @section('konten')
 <form action='{{ url('pendidikan') }}' method='post' enctype="multipart/form-data">
-    @csrf 
+    @csrf
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif  
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("pendidikan") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">

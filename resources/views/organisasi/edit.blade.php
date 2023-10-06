@@ -4,6 +4,15 @@
 
 <form action='{{ url('organisasi/'.$data->id) }}' method='post' enctype="multipart/form-data">
 @csrf 
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif  
 @method('PUT')
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     <a href='{{ url('organisasi') }}' class="btn btn-secondary"><< kembali</a>
