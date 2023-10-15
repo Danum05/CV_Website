@@ -23,7 +23,7 @@ use App\Http\Middleware\CheckRole;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login.index');
 });
 
 Route::middleware(['checkRole:admin'])->group(function () {
