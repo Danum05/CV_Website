@@ -391,11 +391,11 @@
 						// Landing page 1 is selected
 						// Redirect to /danu-dashboard2/{identitas_id}
 						const identitas_id = extractIdentitasIdFromPath(currentPage);
-						window.location.href = `/danu-dashboard/${identitas_id}`;
+						window.location.href = `/danu-dashboard/1`;
 					} else {
 						// Landing page 2 is selected
 						// Redirect to /danu-dashboard
-						window.location.href = `/danu-dashboard2/${identitas_id}`;
+						window.location.href = `/danu-dashboard2/1`;
 					}
 				});
 
