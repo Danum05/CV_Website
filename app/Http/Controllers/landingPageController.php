@@ -9,8 +9,7 @@ use App\Models\Portofolio;
 use App\Models\skill;
 use App\Models\kontak;
 use Illuminate\Http\Request;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use PDF; //import Fungsi PDF
 
 class landingPageController extends Controller
 {
@@ -26,6 +25,18 @@ class landingPageController extends Controller
         return view('landing-page.danu', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData','kontakData'));
     }
 
+    public function danu2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.danu2', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData','kontakData'));
+    }
+
     public function rahma()
     {
         $identitasData = Identitas::all();
@@ -36,6 +47,18 @@ class landingPageController extends Controller
         $kontakData = kontak::all();
 
         return view('landing-page.rahma', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
+    }
+
+    public function rahma2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = Organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.rahma2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
     public function reihan()
@@ -50,6 +73,18 @@ class landingPageController extends Controller
         return view('landing-page.reihan', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
+    public function reihan2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.reihan2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
+    }
+
     public function yasmin()
     {
         $identitasData = Identitas::all();
@@ -60,6 +95,18 @@ class landingPageController extends Controller
         $kontakData = kontak::all();
 
         return view('landing-page.yasmin', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
+    }
+
+    public function yasmin2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.yasmin2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
     public function viewPdf()
@@ -74,21 +121,15 @@ class landingPageController extends Controller
             'kontakData' => kontak::all(),
         ];
     
-        // Convert view ke HTML
-        $html = view('landing-page.danu', $data)->render();
-    
-        // Load HTML ke Dompdf
-        $pdf = new Dompdf();
-        $pdf->loadHtml($html);
-    
-        // Set paper size
-        $pdf->setPaper('A4', 'portrait');
-    
-        // Render PDF (first pass to get total pages)
-        $pdf->render();
-    
-        // Stream atau unduh file PDF
-        return $pdf->stream('document.pdf');
+        $pdf = pdf::loadView('landing-page.pdf', $data);
+
+        //Aktifkan Local File Access supaya bisa pakai file external ( cth File .CSS )
+        $pdf->setOption('enable-local-file-access', true);
+
+        // Stream untuk menampilkan tampilan PDF pada browser
+        return $pdf->stream('table.pdf');
+
+        // return $pdf->download('table.pdf');
     }
     
 }

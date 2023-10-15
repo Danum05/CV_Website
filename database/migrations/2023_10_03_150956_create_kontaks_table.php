@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unique('id');
             $table->string('email');
             $table->string('alamat');
-            $table->integer('no_telepon');
+            $table->string('no_telepon');
         });
     }
 

@@ -29,7 +29,7 @@
         <div class="mb-3 row">
             <label for="no_telepon" class="col-sm-2 col-form-label">No Telepon</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='no_telepon' value="{{ Session::get('no_telepon') }}" id="no_telepon">
+                <input type="text" class="form-control" name='no_telepon' value="+62{{ Session::get('no_telepon') }}" id="no_telepon">
             </div>
         </div>
         <div class="mb-3 row">

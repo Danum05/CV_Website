@@ -25,6 +25,7 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                    <th>ID Identitas</th>
                     <th class="col-md-2">Nama Proyek</th>
                     <th class="col-md-2">Deskripsi</th>
                     <th class="col-md-2">Foto Proyek</th>
@@ -34,6 +35,11 @@
             <tbody>
                 @foreach ($data as $item)
                 <tr>
+                    <td>
+                        <a href="{{ url('identitas') }}">
+                            {{ $item->identitas_id }}
+                        </a>
+                    </td>
                     <td>{{ $item->nama_proyek }}</td>
                     <td>{{ $item->deskripsi }}</td>
                     <td>

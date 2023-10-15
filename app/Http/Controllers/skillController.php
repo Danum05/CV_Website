@@ -49,10 +49,28 @@ class skillController extends Controller
     Session::flash('nama_skill', $request->nama_skill);
     Session::flash('persen_skill', $request->persen_skill);    
 
+    $validator = Validator::make($request->all(), [
+        'identitas_id' => [
+            'required',
+            'exists:identitas,id',
+        ],
+    ]);
+    
+    if ($validator->fails()) {
+        return redirect("skill/create")
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+
     $data = [
         'nama_skill' => $request->nama_skill,
         'persen_skill' => $request->persen_skill,
     ];
+    
+    $identitas_id = $request->input('identitas_id');
+    if ($identitas_id) {
+        $data['identitas_id'] = $identitas_id;
+    }
 
     skill::create($data);
 
