@@ -37,6 +37,10 @@
 					<li class="nav-item"><a href="#organization-section" class="nav-link"><span>Organization</span></a></li>
 					<li class="nav-item"><a href="#portofolio-section" class="nav-link"><span>Portofolio</span></a></li>
 					<li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+					<label class="nav-item switch">
+						<input type="checkbox">
+						<span class="slider round"></span>
+					</label>
 				</ul>
 			</div>
 		</div>
@@ -53,9 +57,21 @@
 						</div>
 						<div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 							<div class="text">
-								<span class="subheading">Hello! This is {{ $identitasData->first()->nama }}</span>
-								<h1 class="mb-4 mt-3">I am a <span>{{ $identitasData->first()->pekerjaan }}</span></h1>
-								<p><a href="#" class="btn btn-primary">Hire me</a> <a href="#" class="btn btn-primary btn-outline-primary">Download CV</a></p>
+								<span class="subheading">Hello! This is {{ $identitasData->nama }}</span>
+								<h1 class="mb-4 mt-3">I am a <span>{{ $identitasData->pekerjaan }}</span></h1>
+								<p><a id="convertLink" class="btn btn-primary btn-outline-primary" data-identitas-id="{{ $identitasData->id }}" href="{{ url('/convert-pdf/' . $identitasData->id) }}">Download CV</a></p>
+
+								<script>
+									// Ambil identitas_id dari atribut data
+									const convertLink = document.getElementById('convertLink');
+									const identitas_id = convertLink.getAttribute('data-identitas-id');
+
+									// Jika identitas_id ditemukan dalam atribut data, tautkan ke halaman /convert-pdf/{identitas_id}
+									if (identitas_id) {
+										convertLink.href = `/convert-pdf/${identitas_id}`;
+									}
+								</script>
+
 							</div>
 						</div>
 					</div>
@@ -73,8 +89,19 @@
 						<div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 							<div class="text">
 								<span class="subheading">Personal Website</span>
-								<h1 class="mb-4 mt-3">Hi, I am <span>{{ $identitasData->first()->nama }}</span> This is my personal website.</h1>
-								<p><a href="#" class="btn btn-primary">Hire me</a> <a href="#" class="btn btn-primary btn-outline-primary">Download CV</a></p>
+								<h1 class="mb-4 mt-3">Hi, I am <span>{{ $identitasData->nama }}</span> This is my personal website.</h1>
+								<p><a id="convertLink" class="btn btn-primary btn-outline-primary" data-identitas-id="{{ $identitasData->id }}" href="{{ url('/convert-pdf/' . $identitasData->id) }}">Download CV</a></p>
+
+								<script>
+									// Ambil identitas_id dari atribut data
+									const convertLink = document.getElementById('convertLink');
+									const identitas_id = convertLink.getAttribute('data-identitas-id');
+
+									// Jika identitas_id ditemukan dalam atribut data, tautkan ke halaman /convert-pdf/{identitas_id}
+									if (identitas_id) {
+										convertLink.href = `/convert-pdf/${identitas_id}`;
+									}
+								</script>
 							</div>
 						</div>
 					</div>
@@ -89,7 +116,7 @@
 				<div class="col-md-6 col-lg-5 d-flex">
 					<div class="img-about img d-flex align-items-stretch">
 						<div class="overlay"></div>
-						<div class="img d-flex align-self-stretch align-items-center" style="background-image: url('{{ asset('pas_foto/' . @$identitasData->first()->pas_foto) }}');">
+						<div class="img d-flex align-self-stretch align-items-center" style="background-image: url('{{ asset('pas_foto/' . @$identitasData->pas_foto) }}');">
 						</div>
 					</div>
 				</div>
@@ -100,7 +127,7 @@
 								<span class="subheading">My Intro</span>
 								<h2 class="mb-4" style="font-size: 34px; text-transform: capitalize;">About Me</h2>
                                 <p class="about-info">
-									Perkenalkan, saya adalah <span>{{ $identitasData->first()->nama }}</span>, seorang <span>{{ $identitasData->first()->jenis_kelamin }}</span> kelahiran <span>{{ $identitasData->first()->tempat_lahir }}</span> pada tanggal <span>{{ $identitasData->first()->tanggal_lahir }}</span>. Saya memeluk agama <span>{{ $identitasData->first()->agama }}</span>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <span>{{ $identitasData->first()->kewarganegaraan }}</span>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya masih dalam status <span>{{ $identitasData->first()->status }}</span>, namun saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
+									Perkenalkan, saya adalah <span>{{ $identitasData->nama }}</span>, seorang <span>{{ $identitasData->jenis_kelamin }}</span> kelahiran <span>{{ $identitasData->tempat_lahir }}</span> pada tanggal <span>{{ $identitasData->tanggal_lahir }}</span>. Saya memeluk agama <span>{{ $identitasData->agama }}</span>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <span>{{ $identitasData->kewarganegaraan }}</span>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya masih dalam status <span>{{ $identitasData->status }}</span>, namun saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
 								</p>
 							</div>
 							<div class="col-md-12">
@@ -292,7 +319,7 @@
 								<span class="fa fa-map-marker"></span>
 							</div>
 							<div class="text">
-								<p><span>Address:</span> {{ $kontakData->first()->alamat }}</p>
+								<p><span>Address:</span> {{ $kontakData->alamat }}</p>
 							</div>
 						</div>
 						<div class="dbox w-100 d-flex">
@@ -300,7 +327,7 @@
 								<span class="fa fa-phone"></span>
 							</div>
 							<div class="text">
-								<p><span>Phone:</span> <a href="tel://1234567920">{{ $kontakData->first()->no_telepon }}</a></p>
+								<p><span>Phone:</span> <a href="tel://1234567920">{{ $kontakData->no_telepon }}</a></p>
 							</div>
 						</div>
 						<div class="dbox w-100 d-flex">
@@ -308,7 +335,7 @@
 								<span class="fa fa-paper-plane"></span>
 							</div>
 							<div class="text">
-								<p><span>Email:</span> <a href="mailto:info@yoursite.com">{{ $kontakData->first()->email }}</a></p>
+								<p><span>Email:</span> <a href="mailto:info@yoursite.com">{{ $kontakData->email }}</a></p>
 							</div>
 						</div>
 					</div>
@@ -353,6 +380,51 @@
 		<script src="{{asset('alt_landing_page')}}/js/google-map.js"></script>
 		
 		<script src="{{asset('alt_landing_page')}}/js/main.js"></script>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const toggleSwitch = document.querySelector('input[type="checkbox"]');
+				const storageKey = 'landingPageToggleState';
+
+				// Check if toggle state is stored in local storage
+				const savedToggleState = localStorage.getItem(storageKey);
+				if (savedToggleState === 'true') {
+					toggleSwitch.checked = false;
+				}
+
+				toggleSwitch.addEventListener('change', function () {
+					// Update local storage with the toggle state
+					localStorage.setItem(storageKey, this.checked);
+
+					// Get the current URL path
+					const currentPage = window.location.pathname;
+
+					if (this.checked) {
+						// Landing page 1 is selected
+						// Redirect to /rahma-dashboard2/{identitas_id}
+						const identitas_id = extractIdentitasIdFromPath(currentPage);
+						window.location.href = `/rahma-dashboard/${identitas_id}`;
+					} else {
+						// Landing page 2 is selected
+						// Redirect to /rahma-dashboard
+						window.location.href = `/rahma-dashboard2/${identitas_id}`;
+					}
+				});
+
+				// Function to extract identitas_id from the URL path
+				function extractIdentitasIdFromPath(path) {
+					const parts = path.split('/');
+					const identitas_idIndex = parts.indexOf('rahma-dashboard2') + 1;
+					return parts[identitas_idIndex];
+				}
+
+				// Additional code to handle toggle state when landing on page 2
+				// const currentPage = window.location.pathname;
+				// if (currentPage === '/rahma-dashboard') {
+				// 	toggleSwitch.checked = true; // Set toggle to "on" on page 2
+				// }
+			});
+		</script>
 		
 	</body>
 	</html>

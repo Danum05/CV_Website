@@ -1,3 +1,7 @@
+<?php
+use App\Models\Identitas;
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,37 +197,29 @@
             die("Koneksi ke database gagal: " . $conn->connect_error);
         }
 
-        $id = 2;
-        $id2 = 2;
-        // Mengambil data identitas
-        $queryIdentitas = "SELECT * FROM identitas WHERE id = $id";
-        $resultIdentitas = $conn->query($queryIdentitas);
+        $identitasData = Identitas::where('id', $id)->first();
 
-        if ($resultIdentitas->num_rows > 0) {
-            $rowIdentitas = $resultIdentitas->fetch_assoc();
-            $nama = $rowIdentitas["nama"];
-            $tempat_lahir = $rowIdentitas["tempat_lahir"];
-            $tanggal_lahir = $rowIdentitas["tanggal_lahir"];
-            $jenis_kelamin = $rowIdentitas["jenis_kelamin"];
-            $agama = $rowIdentitas["agama"];
-            $kewarganegaraan = $rowIdentitas["kewarganegaraan"];
-            $status = $rowIdentitas["status"];
-            while ($row = $resultIdentitas->fetch_assoc()) {
-                $imageData = $row["pas_foto"];
-
-                // Mengonversi data BLOB menjadi URL gambar
-                $base64Image = base64_encode($imageData);
-                $imageSrc = "data:image/jpeg;base64," . $base64Image; // Ubah "image/jpeg" sesuai dengan jenis MIME yang sesuai dengan gambar Anda
-
-                // Menampilkan gambar
-                echo '<img src="' . $imageSrc . '" alt="profile_pic">';
-            }
+        if ($identitasData) {
+            $nama = $identitasData->nama;
+            $tempat_lahir = $identitasData->tempat_lahir;
+            $tanggal_lahir = $identitasData->tanggal_lahir;
+            $jenis_kelamin = $identitasData->jenis_kelamin;
+            $agama = $identitasData->agama;
+            $kewarganegaraan = $identitasData->kewarganegaraan;
+            $status = $identitasData->status;
+            
+            // Tampilkan gambar profil
+            $imageData = $identitasData->pas_foto;
+            $base64Image = base64_encode($imageData);
+            $imageSrc = "data:image/jpeg;base64," . $base64Image;
+            echo '<img src="' . $imageSrc . '" alt="profile_pic">';
         } else {
             echo "Tidak ada data identitas.";
         }
+        
 
         // Mengambil data pendidikan
-        $queryPendidikan = "SELECT * FROM pendidikan = $id2";
+        $queryPendidikan = "SELECT * FROM pendidikan WHERE identitas_id = $id";
         $resultPendidikan = $conn->query($queryPendidikan);
         $pendidikan = [];
 
@@ -235,8 +231,8 @@
             echo "Tidak ada data pendidikan.";
         }
 
-        // Mengambil data pendidikan
-        $queryOrganisasi = "SELECT * FROM organisasi = $id2";
+        // Mengambil data organisasi
+        $queryOrganisasi = "SELECT * FROM organisasi WHERE identitas_id = $id";
         $resultOrganisasi = $conn->query($queryOrganisasi);
         $organisasi = [];
 
@@ -249,7 +245,7 @@
         }
 
         // Mengambil data skill
-        $querySkill = "SELECT * FROM skill = $id2";
+        $querySkill = "SELECT * FROM skill WHERE identitas_id = $id";
         $resultSkill = $conn->query($querySkill);
         $skill = [];
 
@@ -262,7 +258,7 @@
         }
 
         // Mengambil data portofolio
-        $queryPortofolio = "SELECT * FROM portofolio WHERE identitas_id = $id2";
+        $queryPortofolio = "SELECT * FROM portofolio WHERE identitas_id = $id";
         $resultPortofolio = $conn->query($queryPortofolio);
         $portofolio = [];
 
