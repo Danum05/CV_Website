@@ -13,8 +13,9 @@ use PDF; //import Fungsi PDF
 
 class landingPageController extends Controller
 {
-    public function danu($identitas_id)
+    public function danu()
     {
+        $identitas_id = 1;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
@@ -25,8 +26,9 @@ class landingPageController extends Controller
         return view('landing-page.danu', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData','kontakData'));
     }
 
-    public function danu2($identitas_id)
+    public function danu2()
     {
+        $identitas_id = 1;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
@@ -37,8 +39,9 @@ class landingPageController extends Controller
         return view('landing-page.danu2', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData','kontakData'));
     }
 
-    public function rahma($identitas_id)
+    public function rahma()
     {
+        $identitas_id = 2;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
@@ -50,8 +53,9 @@ class landingPageController extends Controller
     }
     
 
-    public function rahma2($identitas_id)
+    public function rahma2()
     {
+        $identitas_id = 2;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
@@ -62,8 +66,9 @@ class landingPageController extends Controller
         return view('landing-page.rahma2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
-    public function reihan($identitas_id)
+    public function reihan()
     {
+        $identitas_id = 3;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
@@ -74,8 +79,9 @@ class landingPageController extends Controller
         return view('landing-page.reihan', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
-    public function reihan2($identitas_id)
+    public function reihan2()
     {
+        $identitas_id = 3;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
@@ -86,8 +92,9 @@ class landingPageController extends Controller
         return view('landing-page.reihan2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
-    public function yasmin($identitas_id)
+    public function yasmin()
     {
+        $identitas_id = 4;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
@@ -98,8 +105,9 @@ class landingPageController extends Controller
         return view('landing-page.yasmin', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
-    public function yasmin2($identitas_id)
+    public function yasmin2()
     {
+        $identitas_id = 4;
         $identitasData = Identitas::find($identitas_id);
         $portofolioData = Portofolio::where('identitas_id', $identitas_id)->get();
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
