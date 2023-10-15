@@ -104,8 +104,10 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					   					<div class="desc">
 						   					<h1>Hi! <br>I'm {{ $identitasData->nama }}</h1>
 						   					<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
-											   <p><a class="btn btn-primary btn-learn" href="{{ url('/danu-pdf') }}">Download CV <i class="icon-download4"></i></a></p>
-											</div>
+											   	<p>
+													<a id="convertLink" class="btn btn-primary btn-learn" href="{{ url('/convert-pdf/1') }}">Download CV <i class="icon-download4"></i></a>
+												</p>
+										</div>
 					   				</div>
 					   			</div>
 					   		</div>
