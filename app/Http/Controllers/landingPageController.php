@@ -26,6 +26,18 @@ class landingPageController extends Controller
         return view('landing-page.danu', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData','kontakData'));
     }
 
+    public function danu2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.danu2', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData','kontakData'));
+    }
+
     public function rahma()
     {
         $identitasData = Identitas::all();
@@ -36,6 +48,18 @@ class landingPageController extends Controller
         $kontakData = kontak::all();
 
         return view('landing-page.rahma', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
+    }
+
+    public function rahma2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = Organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.rahma2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
     public function reihan()
@@ -50,6 +74,18 @@ class landingPageController extends Controller
         return view('landing-page.reihan', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
+    public function reihan2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.reihan2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
+    }
+
     public function yasmin()
     {
         $identitasData = Identitas::all();
@@ -60,6 +96,18 @@ class landingPageController extends Controller
         $kontakData = kontak::all();
 
         return view('landing-page.yasmin', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
+    }
+
+    public function yasmin2()
+    {
+        $identitasData = Identitas::all();
+        $portofolioData = Portofolio::all();
+        $pendidikanData = pendidikan::all();
+        $organisasiData = organisasi::all();
+        $skillData = skill::all();
+        $kontakData = kontak::all();
+
+        return view('landing-page.yasmin2', compact('identitasData', 'portofolioData','pendidikanData', 'organisasiData','skillData','kontakData'));
     }
 
     public function viewPdf()
