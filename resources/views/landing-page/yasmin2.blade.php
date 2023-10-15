@@ -59,19 +59,7 @@
 							<div class="text">
 								<span class="subheading">Hello! This is {{ $identitasData->nama }}</span>
 								<h1 class="mb-4 mt-3">I am a <span>{{ $identitasData->pekerjaan }}</span></h1>
-								<p><a id="convertLink" class="btn btn-primary btn-outline-primary" data-identitas-id="{{ $identitasData->id }}" href="{{ url('/convert-pdf/' . $identitasData->id) }}">Download CV</a></p>
-
-								<script>
-									// Ambil identitas_id dari atribut data
-									const convertLink = document.getElementById('convertLink');
-									const identitas_id = convertLink.getAttribute('data-identitas-id');
-
-									// Jika identitas_id ditemukan dalam atribut data, tautkan ke halaman /convert-pdf/{identitas_id}
-									if (identitas_id) {
-										convertLink.href = `/convert-pdf/${identitas_id}`;
-									}
-								</script>
-
+                                <p><a id="convertLink" class="btn btn-primary btn-outline-primary" href="{{ url('/convert-pdf/4') }}">Download CV</a></p>
 							</div>
 						</div>
 					</div>
@@ -403,11 +391,11 @@
 						// Landing page 1 is selected
 						// Redirect to /yasmin-dashboard2/{identitas_id}
 						const identitas_id = extractIdentitasIdFromPath(currentPage);
-						window.location.href = `/yasmin-dashboard/${identitas_id}`;
+						window.location.href = `/yasmin-dashboard/4`;
 					} else {
 						// Landing page 2 is selected
 						// Redirect to /yasmin-dashboard
-						window.location.href = `/yasmin-dashboard2/${identitas_id}`;
+						window.location.href = `/yasmin-dashboard2/4`;
 					}
 				});
 
