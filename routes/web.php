@@ -40,23 +40,23 @@ Route::post('login', [loginController::class, 'processLogin']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['checkRole:danu'])->group(function () {
-    Route::get('/danu-dashboard', [landingPageController::class, 'danu']);
-    Route::get('/danu-dashboard2', [landingPageController::class, 'danu2']);
+    Route::get('/danu-dashboard/{id}', [landingPageController::class, 'danu']);
+    Route::get('/danu-dashboard2/{id}', [landingPageController::class, 'danu2']);
 });
 
 Route::middleware(['checkRole:rahma'])->group(function () {
-    Route::get('/rahma-dashboard', [landingPageController::class, 'rahma']);
-    Route::get('/rahma-dashboard2', [landingPageController::class, 'rahma2']);
+    Route::get('/rahma-dashboard/{id}', [landingPageController::class, 'rahma']);
+    Route::get('/rahma-dashboard2/{id}', [landingPageController::class, 'rahma2']);
 });
 
 Route::middleware(['checkRole:reihan'])->group(function () {
-    Route::get('/reihan-dashboard', [landingPageController::class, 'reihan']);
-    Route::get('/reihan-dashboard2', [landingPageController::class, 'reihan2']);
+    Route::get('/reihan-dashboard/{id}', [landingPageController::class, 'reihan']);
+    Route::get('/reihan-dashboard2/{id}', [landingPageController::class, 'reihan2']);
 });
 
 Route::middleware(['checkRole:yasmin'])->group(function () {
-    Route::get('/yasmin-dashboard', [landingPageController::class, 'yasmin']);
-    Route::get('/yasmin-dashboard2', [landingPageController::class, 'yasmin2']);
+    Route::get('/yasmin-dashboard/{id}', [landingPageController::class, 'yasmin']);
+    Route::get('/yasmin-dashboard2/{id}', [landingPageController::class, 'yasmin2']);
 });
 
-Route::get('/danu-pdf', [landingPageController::class, 'viewPdf']);
+Route::get('/convert-pdf/{id}', [landingPageController::class, 'viewPdf']);

@@ -56,8 +56,8 @@
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 			<div class="text-center">
-                <div class="author-img" style="background-image: url('{{ asset('pas_foto/' . @$identitasData->first()->pas_foto) }}');"></div>
-				<h1 id="colorlib-logo"><a href="{{asset('landing_page')}}/index.html">{{ $identitasData->first()->nama }}</a></h1>
+                <div class="author-img" style="background-image: url('{{ asset('pas_foto/' . @$identitasData->pas_foto) }}');"></div>
+				<h1 id="colorlib-logo"><a href="{{asset('landing_page')}}/index.html">{{ $identitasData->nama }}</a></h1>
 			</div>
 			<nav id="colorlib-main-menu" role="navigation" class="navbar">
 				<div id="navbar" class="collapse">
@@ -69,6 +69,10 @@
 						<li><a href="#" data-nav-section="organization">Organization</a></li>
 						<li><a href="#" data-nav-section="portofolio">Portofolio</a></li>
 						<li><a href="#" data-nav-section="contact">Contact</a></li>
+						<label class="switch">
+							<input type="checkbox">
+							<span class="slider round"></span>
+						</label>
 					</ul>
 				</div>
 			</nav>
@@ -98,10 +102,21 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 					   				<div class="slider-text-inner js-fullheight">
 					   					<div class="desc">
-						   					<h1>Hi! <br>I'm {{ $identitasData->first()->nama }}</h1>
+						   					<h1>Hi! <br>I'm {{ $identitasData->nama }}</h1>
 						   					<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
-												<p><a class="btn btn-primary btn-learn">Download CV <i class="icon-download4"></i></a></p>
-											</div>
+											   <p><a id="convertLink" class="btn btn-primary btn-learn" data-identitas-id="{{ $identitasData->id }}" href="{{ url('/convert-pdf/' . $identitasData->id) }}">Download CV <i class="icon-download4"></i></a></p>
+
+											   <script>
+													// Ambil identitas_id dari atribut data
+													const convertLink = document.getElementById('convertLink');
+													const identitas_id = convertLink.getAttribute('data-identitas-id');
+
+													// Jika identitas_id ditemukan dalam atribut data, tautkan ke halaman /convert-pdf/{identitas_id}
+													if (identitas_id) {
+														convertLink.href = `/convert-pdf/${identitas_id}`;
+													}
+												</script>
+										</div>
 					   				</div>
 					   			</div>
 					   		</div>
@@ -114,7 +129,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 					   				<div class="slider-text-inner">
 					   					<div class="desc">
-						   					<h1>I am <br>a {{ $identitasData->first()->pekerjaan }}</h1>
+						   					<h1>I am <br>a {{ $identitasData->pekerjaan }}</h1>
 												<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
 												<p><a class="btn btn-primary btn-learn">View Portfolio <i class="icon-briefcase3"></i></a></p>
 										</div>
@@ -137,7 +152,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 										<span class="heading-meta">About Me</span>
 										<h2 class="colorlib-heading">Who Am I?</h2>
 										<p>
-										Perkenalkan, saya adalah <strong>{{ $identitasData->first()->nama }}</strong>, seorang <strong>{{ $identitasData->first()->jenis_kelamin }}</strong> kelahiran <strong>{{ $identitasData->first()->tempat_lahir }}</strong> pada tanggal <strong>{{ $identitasData->first()->tanggal_lahir }}</strong>. Saya memeluk agama <strong>{{ $identitasData->first()->agama }}</strong>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <strong>{{ $identitasData->first()->kewarganegaraan }}</strong>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya masih dalam status <strong>{{ $identitasData->first()->status }}</strong>, namun saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
+											Perkenalkan, saya adalah <strong>{{ $identitasData->nama }}</strong>, seorang <strong>{{ $identitasData->jenis_kelamin }}</strong> kelahiran <strong>{{ $identitasData->tempat_lahir }}</strong> pada tanggal <strong>{{ $identitasData->tanggal_lahir }}</strong>. Saya memeluk agama <strong>{{ $identitasData->agama }}</strong>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <strong>{{ $identitasData->kewarganegaraan }}</strong>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya masih dalam status <strong>{{ $identitasData->status }}</strong>, namun saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
 										</p>
 									</div>
 								</div>
@@ -146,6 +161,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					</div>
 				</div>
 			</section>
+
 
 			<section class="colorlib-skills" data-section="skills">
 				<div class="colorlib-narrow-content">
@@ -295,7 +311,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 									<i class="icon-globe-outline"></i>
 								</div>
 								<div class="colorlib-text">
-									<p><a href="#">{{ $kontakData->first()->email }}</a></p>
+									<p><a href="#">{{ $kontakData->email }}</a></p>
 								</div>
 							</div>
 
@@ -304,7 +320,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 									<i class="icon-map"></i>
 								</div>
 								<div class="colorlib-text">
-									<p>{{ $kontakData->first()->alamat }}</p>
+									<p>{{ $kontakData->alamat }}</p>
 								</div>
 							</div>
 
@@ -313,7 +329,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 									<i class="icon-phone"></i>
 								</div>
 								<div class="colorlib-text">
-									<p><a href="tel://">{{ $kontakData->first()->no_telepon }}</a></p>
+									<p><a href="tel://">{{ $kontakData->no_telepon }}</a></p>
 								</div>
 							</div>
 						</div>
@@ -343,6 +359,51 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 	
 	<!-- MAIN JS -->
 	<script src="{{asset('landing_page')}}/js/main.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const toggleSwitch = document.querySelector('input[type="checkbox"]');
+			const storageKey = 'landingPageToggleState';
+
+			// Check if toggle state is stored in local storage
+			const savedToggleState = localStorage.getItem(storageKey);
+			if (savedToggleState === 'true') {
+				toggleSwitch.checked = false;
+			}
+
+			toggleSwitch.addEventListener('change', function () {
+				// Update local storage with the toggle state
+				localStorage.setItem(storageKey, this.checked);
+
+				// Get the current URL path
+				const currentPage = window.location.pathname;
+
+				if (this.checked) {
+					// Landing page 2 is selected
+					// Redirect to /reihan-dashboard2/{identitas_id}
+					const identitas_id = extractIdentitasIdFromPath(currentPage);
+					window.location.href = `/reihan-dashboard2/${identitas_id}`;
+				} else {
+					// Landing page 1 is selected
+					// Redirect to /reihan-dashboard
+					window.location.href = `/reihan-dashboard/${identitas_id}`;
+				}
+			});
+
+			// Function to extract identitas_id from the URL path
+			function extractIdentitasIdFromPath(path) {
+				const parts = path.split('/');
+				const identitas_idIndex = parts.indexOf('reihan-dashboard') + 1;
+				return parts[identitas_idIndex];
+			}
+
+			// Additional code to handle toggle state when landing on page 2
+			// const currentPage = window.location.pathname;
+			// if (currentPage === '/reihan-dashboard2') {
+			// 	toggleSwitch.checked = true; // Set toggle to "on" on page 2
+			// }
+		});
+	</script>
 
 	</body>
 </html>

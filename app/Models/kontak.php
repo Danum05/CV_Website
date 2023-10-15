@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class kontak extends Model
 {
     use HasFactory;
-    protected $fillable = ['email','alamat','no_telepon'];
+    protected $fillable = ['id','identitas_id','email','alamat','no_telepon'];
     protected $table = 'kontak';
     public $timestamps = false;
+
+    public function identitas()
+    {
+        return $this->belongsTo(Identitas::class);
+    }
 }

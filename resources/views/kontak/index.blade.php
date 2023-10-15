@@ -25,6 +25,7 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                    <th>ID Identitas</th>
                     <th>Email</th>
                     <th>Alamat</th>
                     <th>No Telepon</th>
@@ -34,6 +35,11 @@
             <tbody>
                 @foreach ($data as $item)
                 <tr>
+                    <td>
+                        <a href="{{ url('identitas') }}">
+                            {{ $item->identitas_id }}
+                        </a>
+                    </td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->alamat }}</td>
                     <td>{{ $item->no_telepon }}</td>

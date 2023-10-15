@@ -53,7 +53,11 @@ class kontakController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'alamat' => 'required|string|max:255',
-            'no_telepon' => 'required|regex:/^[0-9]+$/|digits_between:10,15',
+            'no_telepon' => 'required|regex:/^\+62[0-9]{9,21}$/',
+            'identitas_id' => [
+                'required',
+                'exists:identitas,id',
+            ],
         ]);
         
         if ($validator->fails()) {
@@ -68,6 +72,10 @@ class kontakController extends Controller
             'no_telepon' => $request->no_telepon,
         ];
     
+        $identitas_id = $request->input('identitas_id');
+        if ($identitas_id) {
+            $data['identitas_id'] = $identitas_id;
+        }
         kontak::create($data); 
     
         return redirect()->to('kontak')->with('success', 'Berhasil menambahkan data kontak'); 
