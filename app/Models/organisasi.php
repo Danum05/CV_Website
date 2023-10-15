@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class organisasi extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_organisasi','jabatan','tahun_awal','tahun_akhir'];
+    protected $fillable = ['id','identitas_id','nama_organisasi','jabatan','tahun_awal','tahun_akhir'];
     protected $table = 'organisasi';
     public $timestamps = false;
+
+    public function identitas()
+    {
+        return $this->belongsTo(Identitas::class);
+    }
 }

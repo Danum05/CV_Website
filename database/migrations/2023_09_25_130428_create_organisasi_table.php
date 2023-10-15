@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('organisasi', function (Blueprint $table) {
             $table->string('id');
             $table->unique('id');
+            $table->unsignedBigInteger('identitas_id');
             $table->string('nama_organisasi');
             $table->string('jabatan');
             $table->string('tahun_awal');
             $table->string('tahun_akhir');
+
+            $table->foreign('identitas_id')->references('id')->on('identitas')->onDelete('cascade');
         });
     }
 

@@ -15,6 +15,12 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("organisasi") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
+            <label for="nama" class="col-sm-2 col-form-label">ID Identitas</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name='identitas_id' value="{{ Session::get('identitas_id') }}" id="identitas_id">
+            </div>
+        </div>       
+        <div class="mb-3 row">
             <label for="nama_organisasi" class="col-sm-2 col-form-label">Nama Organisasi</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name='nama_organisasi' value="{{ Session::get('nama_organisasi') }}" id="nama_organisasi">
@@ -44,9 +50,6 @@
                 <button type="submit" class="btn btn-primary" name="submit">SIMPAN</button>
             </div>
             <div class="col-sm-2"></div>
-            <div class="col-sm-10">
-                <a href='{{ url("organisasi") }}' class="btn btn-secondary"><< Kembali</a>
-            </div>
         </div>
     </div>
 </form>

@@ -53,10 +53,14 @@ class pendidikanController extends Controller
         Session::flash('tahun_lulus', $request->tahun_lulus);
 
         $validator = Validator::make($request->all(), [
-            'nama_instansi' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'nama_instansi' => 'required|string|max:255',
             'nama_jurusan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'tahun_masuk' => 'required|digits:4|integer',
             'tahun_lulus' => 'required|digits:4|integer|gt:tahun_masuk',
+            'identitas_id' => [
+                'required',
+                'exists:identitas,id',
+            ],
         ]);
         
         if ($validator->fails()) {
@@ -71,7 +75,11 @@ class pendidikanController extends Controller
             'tahun_masuk' => $request->tahun_masuk,
             'tahun_lulus' => $request->tahun_lulus,
         ];
-    
+        
+        $identitas_id = $request->input('identitas_id');
+        if ($identitas_id) {
+            $data['identitas_id'] = $identitas_id;
+        }
         Pendidikan::create($data); 
     
         return redirect()->to('pendidikan')->with('success', 'Berhasil menambahkan data pendidikan'); 
@@ -114,7 +122,7 @@ public function update(Request $request, $id)
     Session::flash('tahun_lulus', $request->tahun_lulus);
 
     $validator = Validator::make($request->all(), [
-        'nama_instansi' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+        'nama_instansi' => 'required|string|max:255',
         'nama_jurusan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
         'tahun_masuk' => 'required|digits:4|integer',
         'tahun_lulus' => 'required|digits:4|integer|gt:tahun_masuk',
@@ -149,7 +157,6 @@ public function destroy($id)
     Pendidikan::where('id', $id)->delete(); 
     return redirect()->to('pendidikan')->with('success', 'Berhasil melakukan delete data'); 
 }
-
 
 }
 

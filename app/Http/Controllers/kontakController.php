@@ -53,7 +53,7 @@ class kontakController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'alamat' => 'required|string|max:255',
-            'no_telepon' => 'required|regex:/^[0-9]+$/|digits_between:10,15',
+            'no_telepon' => 'required|regex:/^\+62[0-9]{9,21}$/',
         ]);
         
         if ($validator->fails()) {
@@ -111,7 +111,7 @@ public function update(Request $request, $id)
     $validator = Validator::make($request->all(), [
         'email' => 'required|string|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
         'alamat' => 'required|string|max:255',
-        'no_telepon' => 'required|regex:/^[0-9]+$/|digits_between:10,15',
+        'no_telepon' => 'required|regex:/^\+62[0-9]{10,15}$/',
     ]);
     
     if ($validator->fails()) {

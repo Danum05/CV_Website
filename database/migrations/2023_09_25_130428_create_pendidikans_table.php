@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pendidikans', function (Blueprint $table) {
+        Schema::create('pendidikan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('identitas_id')->constrained(); // Menambahkan foreign key ke tabel identitas
+            $table->unique('id'); 
+            $table->unsignedBigInteger('identitas_id');
             $table->string('nama_instansi');
             $table->string('nama_jurusan');
             $table->year('tahun_masuk');
             $table->year('tahun_lulus');
             $table->timestamps();
+
+            $table->foreign('identitas_id')->references('id')->on('identitas')->onDelete('cascade');
         });
     }
 

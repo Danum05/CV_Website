@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('portofolio', function (Blueprint $table) {
             $table->string('id');
             $table->unique('id');
+            $table->unsignedBigInteger('identitas_id');
             $table->string('nama_proyek');
             $table->text('deskripsi');
             $table->string('foto_proyek');
+
+            $table->foreign('identitas_id')->references('id')->on('identitas')->onDelete('cascade');
         });
     }
 
