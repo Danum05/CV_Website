@@ -59,7 +59,7 @@
 							<div class="text">
 								<span class="subheading">Hello! This is {{ $identitasData->nama }}</span>
 								<h1 class="mb-4 mt-3">I am a <span>{{ $identitasData->pekerjaan }}</span></h1>
-								<p><a id="convertLink" class="btn btn-primary btn-outline-primary" href="{{ url('/convert-pdf/1') }}">Download CV</a></p>
+								<p><a href="{{ url('/convert-pdf/1') }}" class="btn btn-primary btn-outline-primary">Download CV</a> <a href="{{ route('logout') }}" class="btn btn-primary">Log Out</a></p>
 							</div>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 							<div class="text">
 								<span class="subheading">Personal Website</span>
 								<h1 class="mb-4 mt-3">Hi, I am <span>{{ $identitasData->nama }}</span> This is my personal website.</h1>
-								<p><a id="convertLink" class="btn btn-primary btn-outline-primary" data-identitas-id="{{ $identitasData->id }}" href="{{ url('/convert-pdf/' . $identitasData->id) }}">Download CV</a></p>
+								<p><a href="{{ url('/convert-pdf/1') }}" class="btn btn-primary btn-outline-primary">Download CV</a> <a href="{{ route('logout') }}" class="btn btn-primary">Log Out</a></p>
 
 								<script>
 									// Ambil identitas_id dari atribut data
@@ -338,11 +338,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
-
-					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-					</div>
+					<p>&copy; <script>document.write(new Date().getFullYear());</script> . S1 - 3B/D4 Teknik Informatika</p>
 				</div>
 			</div>
 		</footer>
@@ -415,4 +411,4 @@
 		</script>
 		
 	</body>
-	</html>
+</html>

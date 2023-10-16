@@ -17,9 +17,11 @@
         <div class="mb-3 row">
             <label for="identitas_id" class="col-sm-2 col-form-label">ID Identitas</label>
             <div class="col-sm-10">
-                <select class="form-control" name="identitas_id" id="identitas_id">
+                <select class="form-select" name="identitas_id" id="identitas_id">
                     @foreach ($identitasData as $identitas)
-                        <option value="{{ $identitas->id }}">{{ $identitas->id }}</option>
+                        <option value="{{ $identitas->id }}" @if(Session::get('identitas_id') == $identitas->id) selected @endif>
+                            {{ $identitas->id }} - {{ $identitas->nama }}
+                        </option>
                     @endforeach
                 </select>
             </div>

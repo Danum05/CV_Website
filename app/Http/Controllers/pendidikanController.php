@@ -16,7 +16,7 @@ class pendidikanController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = Pendidikan::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama_instansi', 'like', "%$katakunci%")
@@ -25,7 +25,7 @@ class pendidikanController extends Controller
                 ->orWhere('tahun_lulus', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = Pendidikan::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = Pendidikan::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('pendidikan.index')->with('data', $data); 
     }

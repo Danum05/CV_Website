@@ -15,7 +15,7 @@ class identitasController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = Identitas::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama', 'like', "%$katakunci%")
@@ -27,7 +27,7 @@ class identitasController extends Controller
                 ->orWhere('status', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = Identitas::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = Identitas::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('identitas.index')->with('data', $data); 
     }

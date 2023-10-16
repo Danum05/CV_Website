@@ -78,16 +78,10 @@
 			</nav>
 
 			<div class="colorlib-footer">
-				<p><small>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved. Made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span> <span>Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></span> <span>Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash.com</a></span></small></p>
-				<ul>
-					<li><a href="#"><i class="icon-facebook2"></i></a></li>
-					<li><a href="#"><i class="icon-twitter2"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
-				</ul>
+				<p><small>&copy; <script>document.write(new Date().getFullYear());</script> . S1 - 3B/D4 Teknik Informatika</small></p>
 			</div>
+
+			<div class="text-center"><a href="{{ route('logout') }}" style="text-decoration: none; font-weight: bold;"><small>Log Out</small></a></div>
 
 		</aside>
 
@@ -103,7 +97,6 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					   				<div class="slider-text-inner js-fullheight">
 					   					<div class="desc">
 						   					<h1>Hi! <br>I'm {{ $identitasData->nama }}</h1>
-						   					<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
 											   <p>
 													<a id="convertLink" class="btn btn-primary btn-learn" href="{{ url('/convert-pdf/2') }}">Download CV <i class="icon-download4"></i></a>
 												</p>
@@ -121,8 +114,9 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					   				<div class="slider-text-inner">
 					   					<div class="desc">
 						   					<h1>I am <br>a {{ $identitasData->pekerjaan }}</h1>
-												<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
-												<p><a class="btn btn-primary btn-learn">View Portfolio <i class="icon-briefcase3"></i></a></p>
+											   <p>
+													<a id="convertLink" class="btn btn-primary btn-learn" href="{{ url('/convert-pdf/2') }}">Download CV <i class="icon-download4"></i></a>
+												</p>
 										</div>
 					   				</div>
 					   			</div>
@@ -273,11 +267,11 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 						@foreach($portofolioData as $portofolio)
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="blog-entry">
-								<a href="blog.html" class="blog-img">
+								<div class="blog-img">
 									<img src="{{ asset('foto_proyek/' . $portofolio->foto_proyek) }}" class="img-responsive" alt="{{ $portofolio->nama_proyek }}">
-								</a>
+								</div>
 								<div class="desc">
-									<h3><a href="blog.html">{{ $portofolio->nama_proyek }}</a></h3>
+									<h3>{{ $portofolio->nama_proyek }}</h3>
 									<p>{{ $portofolio->deskripsi }}</p>
 								</div>
 							</div>

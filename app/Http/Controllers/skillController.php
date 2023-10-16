@@ -17,14 +17,14 @@ class skillController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = skill::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama_skill', 'like', "%$katakunci%")
                 ->orWhere('persen_skill', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = skill::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = skill::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('skill.index')->with('data', $data); 
     }

@@ -16,7 +16,7 @@ class organisasiController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = organisasi::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama_organisasi', 'like', "%$katakunci%")
@@ -25,7 +25,7 @@ class organisasiController extends Controller
                 ->orWhere('tahun_akhir', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = organisasi::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = organisasi::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('organisasi.index')->with('data', $data); 
     }

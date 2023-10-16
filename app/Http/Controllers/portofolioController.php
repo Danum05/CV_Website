@@ -16,14 +16,14 @@ class portofolioController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = portofolio::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama_proyek', 'like', "%$katakunci%")
                 ->orWhere('deskripsi', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = portofolio::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = portofolio::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('portofolio.index')->with('data', $data); 
     }

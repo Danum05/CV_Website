@@ -25,7 +25,7 @@
         <div class="mb-3 row">
             <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
             <div class="col-sm-10">
-            <input type="text" class" form-control" name='pekerjaan' value="{{ old('pekerjaan', $data->pekerjaan) }}" id="pekerjaan">
+            <input type="text" class="form-control" name='pekerjaan' value="{{ old('pekerjaan', $data->pekerjaan) }}" id="pekerjaan">
             </div>
         </div>
         <div class="mb-3 row">
@@ -43,7 +43,7 @@
         <div class="mb-3 row">
             <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
             <div class="col-sm-10">
-                <select class="form-control" name='jenis_kelamin' id="jenis_kelamin">
+                <select class="form-select" name='jenis_kelamin' id="jenis_kelamin">
                     <option value="Laki-Laki" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
                     <option value="Perempuan" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                 </select>
@@ -52,11 +52,13 @@
         <div class="mb-3 row">
             <label for="agama" class="col-sm-2 col-form-label">Agama</label>
             <div class="col-sm-10">
-                <select class="form-control" name="agama" id="agama">
+                <select class="form-select" name="agama" id="agama">
                     <option value="Islam" {{ old('agama', $data->agama) == 'Islam' ? 'selected' : '' }}>Islam</option>
                     <option value="Kristen" {{ old('agama', $data->agama) == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                    <option value="Katolik" {{ old('agama', $data->agama) == 'Katolik' ? 'selected' : '' }}>Katolik</option>
                     <option value="Hindu" {{ old('agama', $data->agama) == 'Hindu' ? 'selected' : '' }}>Hindu</option>
                     <option value="Buddha" {{ old('agama', $data->agama) == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                    <option value="Khonghucu" {{ old('agama', $data->agama) == 'Khonghucu' ? 'selected' : '' }}>Khonghucu</option>
                 </select>
             </div>
         </div>    
@@ -69,9 +71,9 @@
         <div class="mb-3 row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-10">
-                <select class="form-control" name="status" id="status">
-                    <option value="Menikah" {{ old('status', $data->status) == 'Menikah' ? 'selected' : '' }}>Menikah</option>
+                <select class="form-select" name="status" id="status">
                     <option value="Belum Menikah" {{ old('status', $data->status) == 'Belum Menikah' ? 'selected' : '' }}>Belum Menikah</option>
+                    <option value="Menikah" {{ old('status', $data->status) == 'Menikah' ? 'selected' : '' }}>Menikah</option>
                 </select>
             </div>
         </div>

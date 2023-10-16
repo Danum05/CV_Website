@@ -16,7 +16,7 @@ class kontakController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = kontak::where('id', 'like', "%$katakunci%")
                 ->orWhere('email', 'like', "%$katakunci%")
@@ -24,7 +24,7 @@ class kontakController extends Controller
                 ->orWhere('no_telepon', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = kontak::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = kontak::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('kontak.index')->with('data', $data); 
     }
