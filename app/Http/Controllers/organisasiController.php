@@ -57,6 +57,10 @@ class organisasiController extends Controller
             'jabatan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'tahun_awal' => 'required|digits:4|integer',
             'tahun_akhir' => 'required|digits:4|integer|gt:tahun_awal',
+            'identitas_id' => [
+                'required',
+                'exists:identitas,id',
+            ],
         ]);
         
         if ($validator->fails()) {
@@ -71,6 +75,11 @@ class organisasiController extends Controller
             'tahun_awal' => $request->tahun_awal,
             'tahun_akhir' => $request->tahun_akhir,
         ];
+
+        $identitas_id = $request->input('identitas_id');
+        if ($identitas_id) {
+            $data['identitas_id'] = $identitas_id;
+        }
 
         organisasi::create($data); 
         return redirect()->to('organisasi')->with('success', 'Berhasil menambahkan data'); 

@@ -48,6 +48,19 @@ class portofolioController extends Controller
     Session::flash('nama_proyek', $request->nama_proyek);
     Session::flash('deskripsi', $request->deskripsi);
 
+    $validator = Validator::make($request->all(), [
+        'identitas_id' => [
+            'required',
+            'exists:identitas,id',
+        ],
+    ]);
+    
+    if ($validator->fails()) {
+        return redirect("portofolio/create")
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+
     // Periksa apakah file telah diunggah
     if ($request->hasFile('foto_proyek')) {
         $foto_file = $request->file('foto_proyek');
@@ -64,7 +77,11 @@ class portofolioController extends Controller
         'deskripsi' => $request->deskripsi,
         'foto_proyek' => $foto_nama
     ];
-
+    
+    $identitas_id = $request->input('identitas_id');
+    if ($identitas_id) {
+        $data['identitas_id'] = $identitas_id;
+    }
     portofolio::create($data);
 
     return redirect()->to('portofolio')->with('success', 'Berhasil menambahkan data');
