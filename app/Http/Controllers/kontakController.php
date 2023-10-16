@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\kontak; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -35,7 +36,9 @@ class kontakController extends Controller
      */
     public function create()
     {
-        return view('kontak.create'); 
+        $identitasData = identitas::all();
+
+        return view('kontak.create')->with('identitasData', $identitasData); 
     }
 
     /**

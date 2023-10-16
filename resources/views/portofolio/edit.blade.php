@@ -25,13 +25,13 @@
     <div class="mb-3 row">
         <label for="nama" class="col-sm-2 col-form-label">Nama Proyek</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name='nama_proyek' value="{{ Session::get('nama_proyek') }}" id="nama_proyek">
+            <input type="text" class="form-control" name='nama_proyek' value="{{ old('nama_proyek', $data->nama_proyek) }}" id="nama_proyek">
         </div>
     </div>
     <div class="mb-3 row">
         <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
         <div class="col-sm-10">
-            <textarea class="form-control" name="deskripsi" value="{{ Session::get('deskripsi') }}" id="deskripsi"></textarea>
+            <textarea class="form-control" name="deskripsi" value="{{ old('deskripsi', $data->deskripsi) }}" id="deskripsi"></textarea>
         </div>
     </div>
     <div class="mb-3 row">

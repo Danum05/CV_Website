@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\skill; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -35,7 +36,9 @@ class skillController extends Controller
      */
     public function create()
     {
-        return view('skill.create'); 
+        $identitasData = identitas::all();
+
+        return view('skill.create')->with('identitasData', $identitasData); 
     }
 
     /**

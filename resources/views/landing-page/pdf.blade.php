@@ -355,16 +355,13 @@ use App\Models\Identitas;
 
         <div class="section">
             <h2>Skill</h2>
-            <ul class="horizontal-skills">
+            <ul>
                 <?php foreach ($skill as $skl): ?>
                     <li>
-                        <div class="skill-info">
-                            <p class="skill-name"><?php echo $skl['nama']; ?></p>
-                            <div class="progress-bar">
-                                <progress value="<?php echo $skl['persentase']; ?>" max="100"></progress>
-                            </div>
-                            <p class="skill-percent"><?php echo $skl['persentase'] . '%'; ?></p>
-                        </div>
+                        <p><?php echo $skl['nama_skill']; ?> 
+                            <progress value="<?php echo $skl['persen_skill']; ?>" max="100"></progress>
+                            <?php echo $skl['persen_skill'] . '%'; ?>
+                        </p>
                     </li>
                 <?php endforeach; ?>
             </ul>
