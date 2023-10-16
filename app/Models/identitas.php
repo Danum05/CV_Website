@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class identitas extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama','pekerjaan','tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama', 'kewarganegaraan', 'status', 'pas_foto'];
+    protected $fillable = ['id','nama','pekerjaan','tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama', 'kewarganegaraan', 'status', 'pas_foto'];
     protected $table = 'identitas';
     public $timestamps = false;
 
@@ -30,11 +30,6 @@ class identitas extends Model
     public function portofolio()
     {
         return $this->hasMany(portofolio::class);
-    }
-
-    public function kontak()
-    {
-        return $this->hasMany(kontak::class);
     }
 }
 

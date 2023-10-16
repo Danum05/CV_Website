@@ -178,6 +178,37 @@ use App\Models\Identitas;
         padding: 10px 0; /* Memberikan sedikit padding untuk penampilan yang lebih baik */
     }
 
+    .horizontal-skills {
+        list-style: none;
+        padding: 0;
+    }
+
+    .horizontal-skills li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .skill-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .skill-name {
+        flex: 1;
+        text-align: right;
+    }
+
+    .progress-bar {
+        flex: 1;
+    }
+
+    .skill-percent {
+        flex: 1;
+        text-align: left;
+    }
 </style>
 
 </head>
@@ -324,13 +355,16 @@ use App\Models\Identitas;
 
         <div class="section">
             <h2>Skill</h2>
-            <ul>
+            <ul class="horizontal-skills">
                 <?php foreach ($skill as $skl): ?>
                     <li>
-                        <p><?php echo $skl['nama_skill']; ?> 
-                            <progress value="<?php echo $skl['persen_skill']; ?>" max="100"></progress>
-                            <?php echo $skl['persen_skill'] . '%'; ?>
-                        </p>
+                        <div class="skill-info">
+                            <p class="skill-name"><?php echo $skl['nama']; ?></p>
+                            <div class="progress-bar">
+                                <progress value="<?php echo $skl['persentase']; ?>" max="100"></progress>
+                            </div>
+                            <p class="skill-percent"><?php echo $skl['persentase'] . '%'; ?></p>
+                        </div>
                     </li>
                 <?php endforeach; ?>
             </ul>
