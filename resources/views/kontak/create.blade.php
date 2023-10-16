@@ -15,6 +15,12 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("kontak") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
+            <label for="nama" class="col-sm-2 col-form-label">ID Identitas</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name='identitas_id' value="{{ Session::get('identitas_id') }}" id="identitas_id">
+            </div>
+        </div> 
+        <div class="mb-3 row">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name='email' value="{{ Session::get('email') }}" id="email">
@@ -29,7 +35,7 @@
         <div class="mb-3 row">
             <label for="no_telepon" class="col-sm-2 col-form-label">No Telepon</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='no_telepon' value="{{ Session::get('no_telepon') }}" id="no_telepon">
+                <input type="text" class="form-control" name='no_telepon' value="+62{{ Session::get('no_telepon') }}" id="no_telepon">
             </div>
         </div>
         <div class="mb-3 row">

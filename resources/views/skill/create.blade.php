@@ -2,9 +2,24 @@
 
 @section('konten')
 <form action='{{ url('skill') }}' method='post' enctype="multipart/form-data">
-    @csrf 
+    @csrf
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif   
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("skill") }}' class="btn btn-secondary"><< Kembali</a>
+        <div class="mb-3 row">
+            <label for="nama" class="col-sm-2 col-form-label">ID Identitas</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name='identitas_id' value="{{ Session::get('identitas_id') }}" id="identitas_id">
+            </div>
+        </div>       
         <div class="mb-3 row">
             <label for="nama_skill" class="col-sm-2 col-form-label">Skill</label>
             <div class="col-sm-10">

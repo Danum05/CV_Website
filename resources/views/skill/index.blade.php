@@ -25,6 +25,7 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                    <th>ID Identitas</th>
                     <th>Skill</th>
                     <th>Persentase</th>
                     <th>Aksi</th>
@@ -33,6 +34,11 @@
             <tbody>
                 @foreach ($data as $item)
                 <tr>
+                    <td>
+                        <a href="{{ url('identitas') }}">
+                            {{ $item->identitas_id }}
+                        </a>
+                    </td>
                     <td>{{ $item->nama_skill }}</td>
                     <td>{{ $item->persen_skill }}</td>
                     <td>
@@ -49,6 +55,6 @@
         </table>
     </div>
     {{ $data->withQueryString()->links() }}
-</div>
-<!-- AKHIR DATA -->
-@endsection
+    </div>
+    <!-- AKHIR DATA -->
+    @endsection

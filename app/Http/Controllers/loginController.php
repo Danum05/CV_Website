@@ -39,19 +39,19 @@ class loginController extends Controller
                     break;
     
                 case 'danu@gmail.com':
-                    return redirect('/danu-dashboard')->with('success', 'Berhasil login');
+                    return redirect('/danu-dashboard/1')->with('success', 'Berhasil login');
                     break;
         
                 case 'rahma@gmail.com':
-                    return redirect('/rahma-dashboard')->with('success', 'Berhasil login');
+                    return redirect('/rahma-dashboard/2')->with('success', 'Berhasil login');
                     break;
 
                 case 'reihan@gmail.com':
-                    return redirect('/reihan-dashboard')->with('success', 'Berhasil login');
+                    return redirect('/reihan-dashboard/3')->with('success', 'Berhasil login');
                     break;
             
                 case 'yasmin@gmail.com':
-                    return redirect('/yasmin-dashboard')->with('success', 'Berhasil login');
+                    return redirect('/yasmin-dashboard/4')->with('success', 'Berhasil login');
                     break;
 
                 default:
