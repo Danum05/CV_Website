@@ -15,9 +15,13 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("kontak") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
-            <label for="nama" class="col-sm-2 col-form-label">ID Identitas</label>
+            <label for="identitas_id" class="col-sm-2 col-form-label">ID Identitas</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='identitas_id' value="{{ Session::get('identitas_id') }}" id="identitas_id">
+                <select class="form-control" name="identitas_id" id="identitas_id">
+                    @foreach ($identitasData as $identitas)
+                        <option value="{{ $identitas->id }}">{{ $identitas->id }}</option>
+                    @endforeach
+                </select>
             </div>
         </div> 
         <div class="mb-3 row">

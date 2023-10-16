@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\portofolio; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -32,9 +33,12 @@ class portofolioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        return view('portofolio.create'); 
+        $identitasData = identitas::all();
+
+        return view('portofolio.create')->with('identitasData', $identitasData); 
     }
 
     /**

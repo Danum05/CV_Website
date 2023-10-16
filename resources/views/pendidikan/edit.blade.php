@@ -25,25 +25,25 @@
         <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama Instansi</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='nama_instansi' value="{{ Session::get('nama_instansi') }}" id="nama_instansi">
+                <input type="text" class="form-control" name='nama_instansi' value="{{ old('nama_instansi', $data->nama_instansi) }}" id="nama_instansi">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="nama_jurusan" class="col-sm-2 col-form-label">Nama Jurusan</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='nama_jurusan' value="{{ Session::get('nama_jurusan') }}" id="nama_jurusan">
+                <input type="text" class="form-control" name='nama_jurusan' value="{{ old('nama_jurusan', $data->nama_jurusan) }}" id="nama_jurusan">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="tahun_masuk" class="col-sm-2 col-form-label">Tahun Masuk</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='tahun_masuk' value="{{ Session::get('tahun_masuk') }}" id="tahun_masuk">
+                <input type="number" class="form-control" name='tahun_masuk' value="{{ old('tahun_masuk', $data->tahun_masuk) }}" id="tahun_masuk">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="tahun_lulus" class="col-sm-2 col-form-label">Tahun Lulus</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='tahun_lulus' value="{{ Session::get('tahun_lulus') }}" id="tahun_lulus">
+                <input type="number" class="form-control" name='tahun_lulus' value="{{ old('tahun_lulus', $data->tahun_lulus) }}" id="tahun_lulus">
             </div>
         </div>
         

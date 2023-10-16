@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\organisasi; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -36,7 +37,9 @@ class organisasiController extends Controller
      */
     public function create()
     {
-        return view('organisasi.create'); 
+        $identitasData = identitas::all();
+
+        return view('organisasi.create')->with('identitasData', $identitasData); 
     }
 
     /**

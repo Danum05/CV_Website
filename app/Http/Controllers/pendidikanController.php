@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\pendidikan; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -36,7 +37,9 @@ class pendidikanController extends Controller
      */
     public function create()
     {
-        return view('pendidikan.create'); 
+        $identitasData = identitas::all();
+
+        return view('pendidikan.create')->with('identitasData', $identitasData); 
     }
 
     /**
@@ -121,6 +124,10 @@ public function update(Request $request, $id)
     Session::flash('tahun_lulus', $request->tahun_lulus);
 
     $validator = Validator::make($request->all(), [
+        'identitas_id' => [
+            'required',
+            'exists:identitas,id',
+        ],
         'nama_instansi' => 'required|string|max:255',
         'nama_jurusan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
         'tahun_masuk' => 'required|digits:4|integer',
