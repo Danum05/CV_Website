@@ -79,17 +79,6 @@
 								<span class="subheading">Personal Website</span>
 								<h1 class="mb-4 mt-3">Hi, I am <span>{{ $identitasData->nama }}</span> This is my personal website.</h1>
 								<p><a href="{{ url('/convert-pdf/1') }}" class="btn btn-primary btn-outline-primary">Download CV</a> <a href="{{ route('logout') }}" class="btn btn-primary">Log Out</a></p>
-
-								<script>
-									// Ambil identitas_id dari atribut data
-									const convertLink = document.getElementById('convertLink');
-									const identitas_id = convertLink.getAttribute('data-identitas-id');
-
-									// Jika identitas_id ditemukan dalam atribut data, tautkan ke halaman /convert-pdf/{identitas_id}
-									if (identitas_id) {
-										convertLink.href = `/convert-pdf/${identitas_id}`;
-									}
-								</script>
 							</div>
 						</div>
 					</div>
