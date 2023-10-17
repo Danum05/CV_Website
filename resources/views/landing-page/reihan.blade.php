@@ -78,16 +78,10 @@
 			</nav>
 
 			<div class="colorlib-footer">
-				<p><small>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved. Made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span> <span>Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></span> <span>Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash.com</a></span></small></p>
-				<ul>
-					<li><a href="#"><i class="icon-facebook2"></i></a></li>
-					<li><a href="#"><i class="icon-twitter2"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
-				</ul>
+				<p><small>&copy; <script>document.write(new Date().getFullYear());</script> . S1 - 3B/D4 Teknik Informatika</small></p>
 			</div>
+
+			<div class="text-center"><a href="{{ route('logout') }}" style="text-decoration: none; font-weight: bold;"><small>Log Out</small></a></div>
 
 		</aside>
 
@@ -121,8 +115,9 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					   				<div class="slider-text-inner">
 					   					<div class="desc">
 						   					<h1>I am <br>a {{ $identitasData->pekerjaan }}</h1>
-												<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
-												<p><a class="btn btn-primary btn-learn">View Portfolio <i class="icon-briefcase3"></i></a></p>
+											   <p>
+													<a id="convertLink" class="btn btn-primary btn-learn" href="{{ url('/convert-pdf/3') }}">Download CV <i class="icon-download4"></i></a>
+												</p>
 										</div>
 					   				</div>
 					   			</div>
