@@ -59,7 +59,9 @@
 							<div class="text">
 								<span class="subheading">Hello! This is {{ $identitasData->nama }}</span>
 								<h1 class="mb-4 mt-3">I am a <span>{{ $identitasData->pekerjaan }}</span></h1>
-								<p><a href="{{ url('/convert-pdf/2') }}" class="btn btn-primary btn-outline-primary">Download CV</a> <a href="{{ route('logout') }}" class="btn btn-primary">Log Out</a></p>
+								<p><a href="{{ url('/convert-pdf/' . $identitasData->nama) }}" class="btn btn-primary btn-outline-primary" id="convertLink" data-name="{{ $identitasData->nama }}">Download CV</a> 
+									<a href="/" class="btn btn-primary">Log Out</a>
+								</p>
 							</div>
 						</div>
 					</div>
@@ -74,11 +76,28 @@
 							<div class="overlay"></div>
 							<div class="overlay-1"></div>
 						</div>
-						<div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+						<div class="one-forth dflex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 							<div class="text">
 								<span class="subheading">Personal Website</span>
 								<h1 class="mb-4 mt-3">Hi, I am <span>{{ $identitasData->nama }}</span> This is my personal website.</h1>
-								<p><a href="{{ url('/convert-pdf/2') }}" class="btn btn-primary btn-outline-primary">Download CV</a> <a href="{{ route('logout') }}" class="btn btn-primary">Log Out</a></p>
+								<p>
+									<a href="{{ url('/convert-pdf/' . $identitasData->nama) }}" class="btn btn-primary btn-outline-primary" id="convertLink" data-name="{{ $identitasData->nama }}">Download CV</a>
+									<a href="/" class="btn btn-primary">Log Out</a>
+								</p>
+							</div>
+						</div>
+						
+						<script>
+							// Ambil nama dari atribut data
+							const convertLink = document.getElementById('convertLink');
+							const name = convertLink.getAttribute('data-name');
+							
+							// Jika nama ditemukan dalam atribut data, tautkan ke halaman /convert-pdf/nama
+							if (name) {
+								convertLink.href = `/convert-pdf/${name}`;
+							}
+						</script>
+						
 							</div>
 						</div>
 					</div>
@@ -104,7 +123,7 @@
 								<span class="subheading">My Intro</span>
 								<h2 class="mb-4" style="font-size: 34px; text-transform: capitalize;">About Me</h2>
                                 <p class="about-info">
-									Perkenalkan, saya adalah <span>{{ $identitasData->nama }}</span>, seorang <span>{{ $identitasData->jenis_kelamin }}</span> kelahiran <span>{{ $identitasData->tempat_lahir }}</span> pada tanggal <span>{{ $identitasData->tanggal_lahir }}</span>. Saya memeluk agama <span>{{ $identitasData->agama }}</span>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <span>{{ $identitasData->kewarganegaraan }}</span>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya masih dalam status <span>{{ $identitasData->status }}</span>, namun saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
+									Perkenalkan, saya adalah <span>{{ $identitasData->nama }}</span>, seorang <span>{{ $identitasData->jenis_kelamin }}</span> kelahiran <span>{{ $identitasData->tempat_lahir }}</span> pada tanggal <span>{{ $identitasData->tanggal_lahir }}</span>. Saya memeluk agama <span>{{ $identitasData->agama }}</span>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <span>{{ $identitasData->kewarganegaraan }}</span>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya berstatus <span>{{ $identitasData->status }}</span>, saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
 								</p>
 							</div>
 							<div class="col-md-12">
@@ -327,11 +346,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
-
-					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-					</div>
+					<p>&copy; <script>document.write(new Date().getFullYear());</script> . S1 - 3B/D4 Teknik Informatika</p>
 				</div>
 			</div>
 		</footer>
@@ -360,48 +375,48 @@
 
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-				const toggleSwitch = document.querySelector('input[type="checkbox"]');
-				const storageKey = 'landingPageToggleState';
-
-				// Check if toggle state is stored in local storage
-				const savedToggleState = localStorage.getItem(storageKey);
-				if (savedToggleState === 'true') {
-					toggleSwitch.checked = false;
+			  const toggleSwitch = document.querySelector('input[type="checkbox"]');
+			  const storageKey = 'landingPageToggleState';
+		  
+			  // Check if toggle state is stored in local storage
+			  const savedToggleState = localStorage.getItem(storageKey);
+			  if (savedToggleState === 'true') {
+				toggleSwitch.checked = false;
+			  }
+		  
+			  toggleSwitch.addEventListener('change', function () {
+				// Update local storage with the toggle state
+				localStorage.setItem(storageKey, this.checked);
+		  
+				// Get the current URL path
+				const currentPage = window.location.pathname;
+		  
+				if (this.checked) {
+				  // Landing page 1 is selected
+				  // Redirect to /dashboard/{name}
+				  const name = extractNameFromPath(currentPage);
+				  window.location.href = `/dashboard/${name}`;
+				} else {
+				  // Landing page 2 is selected
+				  // Redirect to /dashboard2/{name}
+				  const name = extractNameFromPath(currentPage);
+				  window.location.href = `/dashboard2/${name}`;
 				}
-
-				toggleSwitch.addEventListener('change', function () {
-					// Update local storage with the toggle state
-					localStorage.setItem(storageKey, this.checked);
-
-					// Get the current URL path
-					const currentPage = window.location.pathname;
-
-					if (this.checked) {
-						// Landing page 1 is selected
-						// Redirect to /rahma-dashboard2/{identitas_id}
-						const identitas_id = extractIdentitasIdFromPath(currentPage);
-						window.location.href = `/rahma-dashboard/2`;
-					} else {
-						// Landing page 2 is selected
-						// Redirect to /rahma-dashboard
-						window.location.href = `/rahma-dashboard2/2`;
-					}
-				});
-
-				// Function to extract identitas_id from the URL path
-				function extractIdentitasIdFromPath(path) {
-					const parts = path.split('/');
-					const identitas_idIndex = parts.indexOf('rahma-dashboard2') + 1;
-					return parts[identitas_idIndex];
-				}
-
-				// Additional code to handle toggle state when landing on page 2
-				// const currentPage = window.location.pathname;
-				// if (currentPage === '/rahma-dashboard') {
-				// 	toggleSwitch.checked = true; // Set toggle to "on" on page 2
-				// }
+			  });
+		  
+			  // Function to extract name from the URL path
+			  function extractNameFromPath(path) {
+				// Find the last segment of the path (which should be the name)
+				const parts = path.split('/');
+				return parts[parts.length - 1];
+			  }
+		  
+			  // Additional code to handle toggle state when landing on page 2
+			  const currentPage = window.location.pathname;
+			  if (currentPage.startsWith('/dashboard/')) {
+				toggleSwitch.checked = true; // Set toggle to "on" on page 2
+			  }
 			});
-		</script>
-		
+		  </script>			
 	</body>
-	</html>
+</html>

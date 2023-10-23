@@ -81,7 +81,7 @@
 				<p><small>&copy; <script>document.write(new Date().getFullYear());</script> . S1 - 3B/D4 Teknik Informatika</small></p>
 			</div>
 
-			<div class="text-center"><a href="{{ route('logout') }}" style="text-decoration: none; font-weight: bold;"><small>Log Out</small></a></div>
+			<div class="text-center"><a href="/" style="text-decoration: none; font-weight: bold;"><small>Log Out</small></a></div>
 
 		</aside>
 
@@ -97,8 +97,8 @@
 					   				<div class="slider-text-inner js-fullheight">
 					   					<div class="desc">
 						   					<h1>Hi! <br>I'm {{ $identitasData->nama }}</h1>
-											   <p>
-													<a id="convertLink" class="btn btn-primary btn-learn" href="{{ url('/convert-pdf/2') }}">Download CV <i class="icon-download4"></i></a>
+												<p>
+													<a href="{{ url('/convert-pdf/' . $identitasData->nama) }}" class="btn btn-primary btn-learn" id="convertLink" data-name="{{ $identitasData->nama }}">Download CV</a>
 												</p>
 										</div>
 					   				</div>
@@ -115,7 +115,7 @@
 					   					<div class="desc">
 						   					<h1>I am <br>a {{ $identitasData->pekerjaan }}</h1>
 											   <p>
-													<a id="convertLink" class="btn btn-primary btn-learn" href="{{ url('/convert-pdf/2') }}">Download CV <i class="icon-download4"></i></a>
+													<a href="{{ url('/convert-pdf/' . $identitasData->nama) }}" class="btn btn-primary btn-learn" id="convertLink" data-name="{{ $identitasData->nama }}">Download CV</a>
 												</p>
 										</div>
 					   				</div>
@@ -137,7 +137,7 @@
 										<span class="heading-meta">About Me</span>
 										<h2 class="colorlib-heading">Who Am I?</h2>
 										<p>
-											Perkenalkan, saya adalah <strong>{{ $identitasData->nama }}</strong>, seorang <strong>{{ $identitasData->jenis_kelamin }}</strong> kelahiran <strong>{{ $identitasData->tempat_lahir }}</strong> pada tanggal <strong>{{ $identitasData->tanggal_lahir }}</strong>. Saya memeluk agama <strong>{{ $identitasData->agama }}</strong>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <strong>{{ $identitasData->kewarganegaraan }}</strong>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya masih dalam status <strong>{{ $identitasData->status }}</strong>, namun saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
+											Perkenalkan, saya adalah <strong>{{ $identitasData->nama }}</strong>, seorang <strong>{{ $identitasData->jenis_kelamin }}</strong> kelahiran <strong>{{ $identitasData->tempat_lahir }}</strong> pada tanggal <strong>{{ $identitasData->tanggal_lahir }}</strong>. Saya memeluk agama <strong>{{ $identitasData->agama }}</strong>, dan nilai-nilai tersebut telah membimbing saya dalam menjalani kehidupan sehari-hari dengan penuh kesederhanaan dan kebaikan. Meskipun saya adalah warga negara <strong>{{ $identitasData->kewarganegaraan }}</strong>, saya selalu tertarik untuk memahami berbagai budaya dan bahasa dari seluruh dunia, dan saya berharap bisa menjalin hubungan baik dengan beragam orang dari berbagai latar belakang. Saat ini, saya berstatus <strong>{{ $identitasData->status }}</strong>, saya percaya bahwa setiap tahap dalam hidup kita memiliki keindahannya sendiri, dan saya berusaha untuk belajar dan tumbuh sepanjang perjalanan ini.
 										</p>
 									</div>
 								</div>
@@ -347,49 +347,49 @@
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
-			const toggleSwitch = document.querySelector('input[type="checkbox"]');
-			const storageKey = 'landingPageToggleState';
-
-			// Check if toggle state is stored in local storage
-			const savedToggleState = localStorage.getItem(storageKey);
-			if (savedToggleState === 'true') {
-				toggleSwitch.checked = false;
+		  const toggleSwitch = document.querySelector('input[type="checkbox"]');
+		  const storageKey = 'landingPageToggleState';
+	  
+		  // Check if toggle state is stored in local storage
+		  const savedToggleState = localStorage.getItem(storageKey);
+		  if (savedToggleState === 'true') {
+			toggleSwitch.checked = false;
+		  }
+	  
+		  toggleSwitch.addEventListener('change', function () {
+			// Update local storage with the toggle state
+			localStorage.setItem(storageKey, this.checked);
+	  
+			// Get the current URL path
+			const currentPage = window.location.pathname;
+	  
+			if (this.checked) {
+			  // Landing page 1 is selected
+			  // Redirect to /dashboard2/{name}
+			  const name = extractNameFromPath(currentPage);
+			  window.location.href = `/dashboard2/${name}`;
+			} else {
+			  // Landing page 2 is selected
+			  // Redirect to /dashboard/{name}
+			  const name = extractNameFromPath(currentPage);
+			  window.location.href = `/dashboard/${name}`;
 			}
-
-			toggleSwitch.addEventListener('change', function () {
-				// Update local storage with the toggle state
-				localStorage.setItem(storageKey, this.checked);
-
-				// Get the current URL path
-				const currentPage = window.location.pathname;
-
-				if (this.checked) {
-					// Landing page 2 is selected
-					// Redirect to /rahma-dashboard2/{identitas_id}
-					const identitas_id = extractIdentitasIdFromPath(currentPage);
-					window.location.href = `/rahma-dashboard2/2`;
-				} else {
-					// Landing page 1 is selected
-					// Redirect to /rahma-dashboard
-					window.location.href = `/rahma-dashboard/2`;
-				}
-			});
-
-			// Function to extract identitas_id from the URL path
-			function extractIdentitasIdFromPath(path) {
-				const parts = path.split('/');
-				const identitas_idIndex = parts.indexOf('rahma-dashboard') + 1;
-				return parts[identitas_idIndex];
-			}
-
-			// Additional code to handle toggle state when landing on page 2
-			// const currentPage = window.location.pathname;
-			// if (currentPage === '/rahma-dashboard2') {
-			// 	toggleSwitch.checked = true; // Set toggle to "on" on page 2
-			// }
+		  });
+	  
+		  // Function to extract name from the URL path
+		  function extractNameFromPath(path) {
+			const parts = path.split('/');
+			const nameIndex = parts.indexOf('dashboard') + 1;
+			return parts[nameIndex];
+		  }
+	  
+		  // Additional code to handle toggle state when landing on page 2
+		  const currentPage = window.location.pathname;
+		  if (currentPage.startsWith('/dashboard2/')) {
+			toggleSwitch.checked = true; // Set toggle to "on" on page 2
+		  }
 		});
-	</script>
-
+	  </script>	  
 	</body>
 </html>
 

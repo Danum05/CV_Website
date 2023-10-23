@@ -57,6 +57,8 @@ class skillController extends Controller
             'required',
             'exists:identitas,id',
         ],
+        'nama_skill' => 'required',
+        'persen_skill' => 'required',
     ]);
     
     if ($validator->fails()) {
