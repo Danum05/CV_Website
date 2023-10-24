@@ -41,7 +41,7 @@
         <div class="mb-3 row">
             <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
             <div class="col-sm-10">
-                <select class="form-control" name='jenis_kelamin' id="jenis_kelamin">
+                <select class="form-select" name='jenis_kelamin' id="jenis_kelamin">
                     <option value="Laki-Laki" {{ Session::get('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
                     <option value="Perempuan" {{ Session::get('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                 </select>
@@ -50,11 +50,13 @@
         <div class="mb-3 row">
             <label for="agama" class="col-sm-2 col-form-label">Agama</label>
             <div class="col-sm-10">
-                <select class="form-control" name="agama" id="agama">
+                <select class="form-select" name="agama" id="agama">
                     <option value="Islam" {{ Session::get('agama') == 'Islam' ? 'selected' : '' }}>Islam</option>
                     <option value="Kristen" {{ Session::get('agama') == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                    <option value="Katolik" {{ Session::get('agama') == 'Katolik' ? 'selected' : '' }}>Katolik</option>
                     <option value="Hindu" {{ Session::get('agama') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
                     <option value="Buddha" {{ Session::get('agama') == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                    <option value="Khonghucu" {{ Session::get('agama') == 'Khonghucu' ? 'selected' : '' }}>Khonghucu</option>
                 </select>
             </div>
         </div>        
@@ -67,9 +69,9 @@
         <div class="mb-3 row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-10">
-                <select class="form-control" name="status" id="status">
-                    <option value="Menikah" {{ Session::get('status') == 'Menikah' ? 'selected' : '' }}>Menikah</option>
+                <select class="form-select" name="status" id="status">
                     <option value="Belum Menikah" {{ Session::get('status') == 'Belum Menikah' ? 'selected' : '' }}>Belum Menikah</option>
+                    <option value="Menikah" {{ Session::get('status') == 'Menikah' ? 'selected' : '' }}>Menikah</option>
                 </select>
             </div>
         </div>

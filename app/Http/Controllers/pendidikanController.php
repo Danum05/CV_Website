@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\pendidikan; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -15,7 +16,7 @@ class pendidikanController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = Pendidikan::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama_instansi', 'like', "%$katakunci%")
@@ -24,7 +25,7 @@ class pendidikanController extends Controller
                 ->orWhere('tahun_lulus', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = Pendidikan::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = Pendidikan::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('pendidikan.index')->with('data', $data); 
     }
@@ -36,7 +37,9 @@ class pendidikanController extends Controller
      */
     public function create()
     {
-        return view('pendidikan.create'); 
+        $identitasData = identitas::all();
+
+        return view('pendidikan.create')->with('identitasData', $identitasData); 
     }
 
     /**
@@ -53,10 +56,17 @@ class pendidikanController extends Controller
         Session::flash('tahun_lulus', $request->tahun_lulus);
 
         $validator = Validator::make($request->all(), [
-            'nama_instansi' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'nama_jurusan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'nama_instansi' => 'required|string|max:255',
             'tahun_masuk' => 'required|digits:4|integer',
             'tahun_lulus' => 'required|digits:4|integer|gt:tahun_masuk',
+            'identitas_id' => [
+                'required',
+                'exists:identitas,id',
+            ],
+            'identitas_id' => [
+                'required',
+                'exists:identitas,id',
+            ],
         ]);
         
         if ($validator->fails()) {
@@ -71,7 +81,11 @@ class pendidikanController extends Controller
             'tahun_masuk' => $request->tahun_masuk,
             'tahun_lulus' => $request->tahun_lulus,
         ];
-    
+        
+        $identitas_id = $request->input('identitas_id');
+        if ($identitas_id) {
+            $data['identitas_id'] = $identitas_id;
+        }
         Pendidikan::create($data); 
     
         return redirect()->to('pendidikan')->with('success', 'Berhasil menambahkan data pendidikan'); 
@@ -149,7 +163,6 @@ public function destroy($id)
     Pendidikan::where('id', $id)->delete(); 
     return redirect()->to('pendidikan')->with('success', 'Berhasil melakukan delete data'); 
 }
-
 
 }
 

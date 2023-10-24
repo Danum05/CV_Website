@@ -1,4 +1,5 @@
 /********** Template CSS **********/
+
 :root {
     --primary: #009CFF;
     --light: #F3F6F9;
@@ -275,3 +276,30 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+/* Custom select styles */
+.custom-select {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 50px;
+    cursor: pointer;
+  }
+  
+  .custom-select select {
+    display: none; /* Hide the original select element */
+  }
+  
+  .custom-select .arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  .custom-select .arrow::before {
+    content: "\25BC"; /* Unicode arrow-down character */
+  }

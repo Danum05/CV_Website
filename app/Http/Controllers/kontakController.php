@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\kontak; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -15,7 +16,7 @@ class kontakController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = kontak::where('id', 'like', "%$katakunci%")
                 ->orWhere('email', 'like', "%$katakunci%")
@@ -23,7 +24,7 @@ class kontakController extends Controller
                 ->orWhere('no_telepon', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = kontak::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = kontak::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('kontak.index')->with('data', $data); 
     }
@@ -35,7 +36,9 @@ class kontakController extends Controller
      */
     public function create()
     {
-        return view('kontak.create'); 
+        $identitasData = identitas::all();
+
+        return view('kontak.create')->with('identitasData', $identitasData); 
     }
 
     /**
@@ -53,7 +56,11 @@ class kontakController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'alamat' => 'required|string|max:255',
-            'no_telepon' => 'required|regex:/^[0-9]+$/|digits_between:10,15',
+            'no_telepon' => 'required|regex:/^\+62[0-9]{9,21}$/',
+            'identitas_id' => [
+                'required',
+                'exists:identitas,id',
+            ],
         ]);
         
         if ($validator->fails()) {
@@ -68,6 +75,10 @@ class kontakController extends Controller
             'no_telepon' => $request->no_telepon,
         ];
     
+        $identitas_id = $request->input('identitas_id');
+        if ($identitas_id) {
+            $data['identitas_id'] = $identitas_id;
+        }
         kontak::create($data); 
     
         return redirect()->to('kontak')->with('success', 'Berhasil menambahkan data kontak'); 
@@ -111,7 +122,7 @@ public function update(Request $request, $id)
     $validator = Validator::make($request->all(), [
         'email' => 'required|string|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
         'alamat' => 'required|string|max:255',
-        'no_telepon' => 'required|regex:/^[0-9]+$/|digits_between:10,15',
+        'no_telepon' => 'required|regex:/^\+62[0-9]{10,15}$/',
     ]);
     
     if ($validator->fails()) {

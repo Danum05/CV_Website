@@ -8,6 +8,7 @@ use App\Http\Controllers\portofolioController;
 use App\Http\Controllers\skillController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\landingPageController;
+use App\Http\Controllers\homeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 
@@ -22,9 +23,7 @@ use App\Http\Middleware\CheckRole;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [homeController::class, 'home']);
 
 Route::middleware(['checkRole:admin'])->group(function () {
     Route::resource('identitas', IdentitasController::class);
@@ -39,20 +38,10 @@ Route::get('login', [loginController::class, 'index']);
 Route::post('login', [loginController::class, 'processLogin']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::middleware(['checkRole:danu'])->group(function () {
-    Route::get('/danu-dashboard', [landingPageController::class, 'danu']);
-});
 
-Route::middleware(['checkRole:rahma'])->group(function () {
-    Route::get('/rahma-dashboard', [landingPageController::class, 'rahma']);
-});
+Route::get('/dashboard/{name}', [landingPageController::class, 'dashboard']);
+Route::get('/dashboard2/{name}', [landingPageController::class, 'dashboard2']);
 
-Route::middleware(['checkRole:reihan'])->group(function () {
-    Route::get('/reihan-dashboard', [landingPageController::class, 'reihan']);
-});
 
-Route::middleware(['checkRole:yasmin'])->group(function () {
-    Route::get('/yasmin-dashboard', [landingPageController::class, 'yasmin']);
-});
+Route::get('/convert-pdf/{name}', [landingPageController::class, 'viewPdf']);
 
-Route::get('/danu-pdf', [landingPageController::class, 'viewPdf']);

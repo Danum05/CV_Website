@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\skill; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,14 +17,14 @@ class skillController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = skill::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama_skill', 'like', "%$katakunci%")
                 ->orWhere('persen_skill', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = skill::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = skill::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('skill.index')->with('data', $data); 
     }
@@ -35,7 +36,9 @@ class skillController extends Controller
      */
     public function create()
     {
-        return view('skill.create'); 
+        $identitasData = identitas::all();
+
+        return view('skill.create')->with('identitasData', $identitasData); 
     }
 
     /**
@@ -49,10 +52,30 @@ class skillController extends Controller
     Session::flash('nama_skill', $request->nama_skill);
     Session::flash('persen_skill', $request->persen_skill);    
 
+    $validator = Validator::make($request->all(), [
+        'identitas_id' => [
+            'required',
+            'exists:identitas,id',
+        ],
+        'nama_skill' => 'required',
+        'persen_skill' => 'required',
+    ]);
+    
+    if ($validator->fails()) {
+        return redirect("skill/create")
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+
     $data = [
         'nama_skill' => $request->nama_skill,
         'persen_skill' => $request->persen_skill,
     ];
+    
+    $identitas_id = $request->input('identitas_id');
+    if ($identitas_id) {
+        $data['identitas_id'] = $identitas_id;
+    }
 
     skill::create($data);
 

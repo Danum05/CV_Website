@@ -25,6 +25,7 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nama</th>
                     <th>Pekerjaan</th>
                     <th>Tempat Lahir</th>
@@ -40,6 +41,7 @@
             <tbody>
                 @foreach ($data as $item)
                 <tr>
+                    <td>{{ $item->id }}</td>
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->pekerjaan }}</td>
                     <td>{{ $item->tempat_lahir }}</td>

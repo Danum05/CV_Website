@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\identitas;
 use App\Models\portofolio; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -15,14 +16,14 @@ class portofolioController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 10;
         if (strlen($katakunci)) {
             $data = portofolio::where('id', 'like', "%$katakunci%")
                 ->orWhere('nama_proyek', 'like', "%$katakunci%")
                 ->orWhere('deskripsi', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
-            $data = portofolio::orderBy('id', 'desc')->paginate($jumlahbaris);
+            $data = portofolio::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
         return view('portofolio.index')->with('data', $data); 
     }
@@ -32,9 +33,12 @@ class portofolioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        return view('portofolio.create'); 
+        $identitasData = identitas::all();
+
+        return view('portofolio.create')->with('identitasData', $identitasData); 
     }
 
     /**
@@ -47,6 +51,22 @@ class portofolioController extends Controller
     {
     Session::flash('nama_proyek', $request->nama_proyek);
     Session::flash('deskripsi', $request->deskripsi);
+
+    $validator = Validator::make($request->all(), [
+        'identitas_id' => [
+            'required',
+            'exists:identitas,id',
+        ],
+        'nama_proyek' => 'required',
+        'deskripsi' => 'required',
+        'foto_proyek' => 'required|image',
+    ]);
+    
+    if ($validator->fails()) {
+        return redirect("portofolio/create")
+                    ->withErrors($validator)
+                    ->withInput();
+    }
 
     // Periksa apakah file telah diunggah
     if ($request->hasFile('foto_proyek')) {
@@ -64,7 +84,11 @@ class portofolioController extends Controller
         'deskripsi' => $request->deskripsi,
         'foto_proyek' => $foto_nama
     ];
-
+    
+    $identitas_id = $request->input('identitas_id');
+    if ($identitas_id) {
+        $data['identitas_id'] = $identitas_id;
+    }
     portofolio::create($data);
 
     return redirect()->to('portofolio')->with('success', 'Berhasil menambahkan data');
