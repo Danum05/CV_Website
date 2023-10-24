@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 use App\Models\identitas;
 use App\Models\portofolio; 
@@ -6,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class portofolioController extends Controller
+class skillController extends Controller
 {
-       /**
+           /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -18,14 +19,14 @@ class portofolioController extends Controller
         $katakunci = $request->katakunci;
         $jumlahbaris = 10;
         if (strlen($katakunci)) {
-            $data = portofolio::where('id', 'like', "%$katakunci%")
-                ->orWhere('nama_proyek', 'like', "%$katakunci%")
-                ->orWhere('deskripsi', 'like', "%$katakunci%")
+            $data = skill::where('id', 'like', "%$katakunci%")
+                ->orWhere('nama_skill', 'like', "%$katakunci%")
+                ->orWhere('persen_skill', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else {
             $data = portofolio::orderBy('id', 'asc')->paginate($jumlahbaris);
         }
-        return view('portofolio.index')->with('data', $data); 
+        return view('skill.index')->with('data', $data); 
     }
 
         /**
@@ -49,8 +50,8 @@ class portofolioController extends Controller
      */
     public function store(Request $request)
     {
-    Session::flash('nama_proyek', $request->nama_proyek);
-    Session::flash('deskripsi', $request->deskripsi);
+    Session::flash('nama_skill', $request->nama_skill);
+    Session::flash('persen_skill', $request->persen_skill);    
 
     $validator = Validator::make($request->all(), [
         'identitas_id' => [
@@ -80,9 +81,8 @@ class portofolioController extends Controller
     }
 
     $data = [
-        'nama_proyek' => $request->nama_proyek,
-        'deskripsi' => $request->deskripsi,
-        'foto_proyek' => $foto_nama
+        'nama_skill' => $request->nama_skill,
+        'persen_skill' => $request->persen_skill,
     ];
     
     $identitas_id = $request->input('identitas_id');
@@ -91,7 +91,7 @@ class portofolioController extends Controller
     }
     portofolio::create($data);
 
-    return redirect()->to('portofolio')->with('success', 'Berhasil menambahkan data');
+    return redirect()->to('skill')->with('success', 'Berhasil menambahkan data');
     }
 
     /**
@@ -113,8 +113,8 @@ public function show($id)
  */
 public function edit($id)
 {
-    $data = portofolio::where('id', $id)->first(); 
-    return view('portofolio.edit')->with('data', $data); 
+    $data = skill::where('id', $id)->first(); 
+    return view('skill.edit')->with('data', $data); 
 }
 
 /**
@@ -127,22 +127,12 @@ public function edit($id)
 public function update(Request $request, $id)
 {
     $data = [
-        'nama_proyek' => $request->nama_proyek,
-        'deskripsi' => $request->deskripsi,
+        'nama_skill' => $request->nama_skill,
+        'persen_skill' => $request->persen_skill,
     ];
 
-    if ($request->hasFile('foto_proyek')) {
-
-        $foto_file = $request->file('foto_proyek');
-        $foto_ekstensi = $foto_file->extension();
-        $foto_nama = date('ymdhis') . '.' . $foto_ekstensi;
-        $foto_file->move(public_path('foto_proyek'), $foto_nama);
-
-        $data['foto_proyek'] = $foto_nama;
-    }
-
-    portofolio::where('id', $id)->update($data);
-    return redirect()->to('portofolio')->with('success', 'Berhasil melakukan update data');
+    skill::where('id', $id)->update($data);
+    return redirect()->to('skill')->with('success', 'Berhasil melakukan update data');
 }
 
 
@@ -154,9 +144,7 @@ public function update(Request $request, $id)
  */
 public function destroy($id)
 {
-    portofolio::where('id', $id)->delete(); 
-    return redirect()->to('portofolio')->with('success', 'Berhasil melakukan delete data'); 
+    skill::where('id', $id)->delete(); 
+    return redirect()->to('skill')->with('success', 'Berhasil melakukan delete data'); 
 }
-
 }
-
