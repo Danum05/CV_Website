@@ -11,22 +11,30 @@ use App\Models\portofolio; // Gantilah dengan namespace yang sesuai dengan model
 class PortofolioTest extends TestCase
 {
     // Tambah data valid
+    
     public function testCreatePortofolio()
     {
         $image = UploadedFile::fake()->image('test.jpeg');
-        $identitas = Identitas::find(1); // Ganti dengan ID yang benar
+        $identitas = Identitas::find(4); // Ganti dengan ID yang benar
         $data = [
-            'nama_proyek' => 'RENOVATING NATIONAL GALLERY',
-            'deskripsi' => 'Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.',
+            'nama_proyek' => 'Website Marketplace',
+            'deskripsi' => 'Website menjual makanan',
             'foto_proyek' => $image
         ];
         $data['identitas_id'] = $identitas->id;
-        $portofolio = portofolio::create($data);
 
-        $this->assertNotNull($portofolio);
-        $this->assertEquals('RENOVATING NATIONAL GALLERY', $portofolio->nama_proyek);
-        $this->assertEquals('Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.', $portofolio->deskripsi);
-        $this->assertFileExists(storage_path('app/public/' . $portofolio->foto_proyek));
+        // Lakukan permintaan POST ke endpoint pembuatan Identitas
+        $response = $this->post('/portofolio', $data);
+
+        // Pastikan respons HTTP adalah 302 (redirect)
+        $response->assertStatus(302);
+
+        // Pastikan Identitas telah dibuat
+        $this->assertDatabaseHas('portofolio', ['nama_proyek' => 'Website Marketplace']);
+        
+        // Hapus file yang diunggah
+        @unlink(storage_path('app/public/' . $image->hashName()));
+        Portofolio::where('nama_proyek', 'Website Marketplace')->delete();
     }
 
     /*

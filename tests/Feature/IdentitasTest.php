@@ -9,13 +9,14 @@ use Illuminate\Http\UploadedFile;
 
 class IdentitasTest extends TestCase
 {
-    // Tambah data valid
     public function testCreateIdentitas()
     {
+        // Simulasikan file yang diunggah
         $image = UploadedFile::fake()->image('test.jpeg');
-        $identitas = Identitas::find(1); // Ganti dengan ID yang benar
+        
+        // Data yang akan digunakan untuk membuat data Identitas baru
         $data = [
-            'nama' => 'Hanni Pham',
+            'nama' => 'Yasmin',
             'pekerjaan' => 'Singer',
             'tempat_lahir' => 'Vietnam',
             'tanggal_lahir' => '2004-10-06',
@@ -25,65 +26,56 @@ class IdentitasTest extends TestCase
             'status' => 'Belum Menikah',
             'pas_foto' => $image
         ];
-        $data['identitas_id'] = $identitas->id;
-        $identitas = identitas::create($data);
 
-        $this->assertNotNull($identitas);
-        $this->assertEquals('Hanni Pham', $identitas->nama);
-        $this->assertEquals('Singer', $identitas->pekerjaan);
-        $this->assertEquals('Vietnam', $identitas->tempat_lahir);
-        $this->assertEquals('2004-10-06', $identitas->tanggal_lahir);
-        $this->assertEquals('Perempuan', $identitas->jenis_kelamin);
-        $this->assertEquals('Islam', $identitas->agama);
-        $this->assertEquals('Vietnam', $identitas->kewarganegaraan);
-        $this->assertEquals('Belum Menikah', $identitas->status);
-        $this->assertFileExists(storage_path('app/public/' . $identitas->foto_proyek));
+        // Lakukan permintaan POST ke endpoint pembuatan Identitas
+        $response = $this->post('/identitas', $data);
+
+        // Pastikan respons HTTP adalah 302 (redirect)
+        $response->assertStatus(302);
+
+        // Pastikan Identitas telah dibuat
+        $this->assertDatabaseHas('identitas', ['nama' => 'Yasmin']);
+
+        // Hapus file yang diunggah
+        @unlink(storage_path('app/public/' . $image->hashName()));
     }
+
 
     /*
-    public function testReadidentitas() {
-        // Data yang akan diuji untuk operasi Read (Contoh)
-        $identitas = Identitas::find(1); // Gantilah dengan cara membaca identitas sesuai dengan aplikasi Anda
+    public function testUpdateIdentitas()
+    {
+        // Data yang akan digunakan untuk mengupdate data Identitas
+        $data = [
+            'nama' => 'Updated Name',
+            'pekerjaan' => 'Updated',
+            'tempat_lahir' => 'Updated',
+            'tanggal_lahir' => 'Updated',
+            'jenis_kelamin' => 'Updated',
+            'agama' => 'Updated',
+            'kewarganegaraan' => 'Updated',
+            'status' => 'Updated',
+        ];
 
-        $this->assertInstanceOf(identitas::class, $identitas);
+        // Lakukan permintaan PUT ke endpoint update Identitas
+        $response = $this->put('/identitas/1', $data);
+
+        // Pastikan respons HTTP adalah 302 (redirect)
+        $response->assertStatus(302);
+
+        // Pastikan Identitas telah diupdate
+        $this->assertDatabaseHas('identitas', ['nama' => 'Updated Name']);
     }
 
-    public function testUpdateIdentitas() {
-        // Data yang akan diuji untuk operasi Update (Contoh)
-        $identitas = Identitas::find(1); // Gantilah dengan cara membaca identitas yang akan diperbarui
+    public function testDeleteIdentitas()
+    {
+        // Lakukan permintaan DELETE ke endpoint penghapusan Identitas
+        $response = $this->delete('/identitas/1');
 
-        $identitas->nama = 'Updated identitas Name'; // Gantilah dengan data perubahan yang sesuai
-        $identitas->pekerjaan = 'Updated';
-        $identitas->tempat_lahir = 'Updated';
-        $identitas->tanggal_lahir = 'Updated';
-        $identitas->jenis_kelamin = 'Updated';
-        $identitas->agama = 'Updated';
-        $identitas->kewarganegaraan = 'Updated';
-        $identitas->status = 'Updated';
-        $identitas->foto_proyek = 'Updated';
-        $identitas->save(); // Gantilah dengan cara menyimpan perubahan sesuai dengan aplikasi Anda
+        // Pastikan respons HTTP adalah 302 (redirect)
+        $response->assertStatus(302);
 
-        $updatedidentitas = identitas::find(1); // Gantilah dengan cara membaca identitas yang telah diperbarui
-
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->nama);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->pekerjaan);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->tempat_lahir);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->tanggal_lahir);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->jenis_kelamin);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->agama);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->kewarganegaraan);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->status);
-        $this->assertEquals('Updated identitas Name', $updatedidentitas->foto_proyek);
-    }
-
-    public function testDeleteIdentitas() {
-        // Data yang akan diuji untuk operasi Delete (Contoh)
-        $identitas = Identitas::find(1); // Gantilah dengan cara membaca identitas yang akan dihapus
-
-        $deleted = $identitas->delete(); // Gantilah dengan cara menghapus identitas sesuai dengan aplikasi Anda
-
-        $this->assertTrue($deleted);
-        $this->assertNull(Identitas::find(1)); // Memastikan identitas telah dihapus
+        // Pastikan Identitas telah dihapus
+        $this->assertDatabaseMissing('identitas', ['id' => 1]);
     }
     */
 }

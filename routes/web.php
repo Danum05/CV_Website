@@ -6,6 +6,7 @@ use App\Http\Controllers\organisasiController;
 use App\Http\Controllers\pendidikanController;
 use App\Http\Controllers\portofolioController;
 use App\Http\Controllers\skillController;
+use App\Http\Controllers\galleryController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\landingPageController;
 use App\Http\Controllers\homeController;
@@ -32,6 +33,7 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::resource('organisasi', OrganisasiController::class);
     Route::resource('skill', SkillController::class);
     Route::resource('kontak', KontakController::class);
+    Route::resource('gallery', galleryController::class);
 });
 
 Route::get('login', [loginController::class, 'index']);

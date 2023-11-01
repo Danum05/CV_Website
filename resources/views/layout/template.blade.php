@@ -74,6 +74,9 @@
                 <div class="navbar-nav w-100">
                     <a href="{{ url('kontak') }}" class="nav-item nav-link"><i class="fas fa-address-book"></i>Kontak</a>
                 </div>
+                <div class="navbar-nav w-100">
+                    <a href="{{ url('gallery') }}" class="nav-item nav-link"><i class="fas fa-images"></i>Galeri</a>
+                </div>
             </nav>
         </div>
         <!-- Sidebar End -->
