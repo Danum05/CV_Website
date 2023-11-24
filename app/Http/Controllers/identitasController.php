@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\identitas; 
+use App\Models\User; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -39,7 +40,9 @@ class identitasController extends Controller
      */
     public function create()
     {
-        return view('identitas.create'); 
+        $UserData = User::all();
+
+        return view('identitas.create')->with('UserData', $UserData); 
     }
 
     /**
@@ -68,8 +71,13 @@ class identitasController extends Controller
             'agama' => 'required|string|max:255',
             'kewarganegaraan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'status' => 'required|string|max:255',
-            'pas_foto' => 'required|image' 
+            'pas_foto' => 'required|image',
+            'user_id' => [
+                'required',
+                'exists:users,id',
+            ],
         ]);
+        
         
         if ($validator->fails()) {
             return redirect('identitas/create')
@@ -94,6 +102,11 @@ class identitasController extends Controller
             'pas_foto' => $foto_nama
         ];
 
+        $user_id = $request->input('user_id');
+        if ($user_id) {
+            $data['user_id'] = $user_id;
+        }
+
         Identitas::create($data); 
         return redirect()->to('identitas')->with('success', 'Berhasil menambahkan data'); 
     }
@@ -106,9 +119,8 @@ class identitasController extends Controller
      */
     public function show($id)
     {
-    //
-    }
-
+        //
+    }    
     /**
      * Show the form for editing the specified resource.
      *

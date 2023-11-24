@@ -24,4 +24,10 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+    
+    protected $routeMiddleware = [
+        // ...
+        'checkIdentitasOwner' => \App\Http\Middleware\CheckIdentitasOwner::class,
+    ];
+    
 }

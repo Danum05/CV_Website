@@ -7,6 +7,7 @@ use App\Models\organisasi;
 use App\Models\pendidikan;
 use App\Models\Portofolio;
 use App\Models\skill;
+use App\Models\gallery;
 use App\Models\kontak;
 use Illuminate\Http\Request;
 use PDF; //import Fungsi PDF
@@ -26,9 +27,10 @@ class landingPageController extends Controller
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
         $organisasiData = Organisasi::where('identitas_id', $identitas_id)->get();
         $skillData = Skill::where('identitas_id', $identitas_id)->get();
+        $galeriData = Gallery::where('identitas_id', $identitas_id)->get();
         $kontakData = Kontak::where('identitas_id', $identitas_id)->first();
     
-        return view('landing-page.dashboard', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData', 'kontakData'));
+        return view('landing-page.dashboard', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData', 'galeriData', 'kontakData'));
     }
     
     public function dashboard2($name)
@@ -44,9 +46,10 @@ class landingPageController extends Controller
         $pendidikanData = Pendidikan::where('identitas_id', $identitas_id)->get();
         $organisasiData = Organisasi::where('identitas_id', $identitas_id)->get();
         $skillData = Skill::where('identitas_id', $identitas_id)->get();
+        $galeriData = Gallery::where('identitas_id', $identitas_id)->get();
         $kontakData = Kontak::where('identitas_id', $identitas_id)->first();
     
-        return view('landing-page.dashboard2', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData', 'kontakData'));
+        return view('landing-page.dashboard2', compact('identitasData', 'portofolioData', 'pendidikanData', 'organisasiData', 'skillData', 'galeriData', 'kontakData'));
     }
     
     public function viewPdf($name)

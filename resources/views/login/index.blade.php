@@ -71,6 +71,9 @@
                             <div class="mb-3 d-grid">
                                 <button type="submit" name="submit" class="btn btn-primary">LOGIN</button>
                             </div>
+                            <div class="mb-3 d-grid">
+                                <a href="/register" class="btn btn-secondary">Daftar Akun</a>
+                            </div>
                         </form>
                     </div>
                 </div>

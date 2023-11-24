@@ -68,6 +68,7 @@
 						<li><a href="#" data-nav-section="education">Education</a></li>
 						<li><a href="#" data-nav-section="organization">Organization</a></li>
 						<li><a href="#" data-nav-section="portofolio">Portofolio</a></li>
+						<li><a href="#" data-nav-section="gallery">Gallery</a></li>
 						<li><a href="#" data-nav-section="contact">Contact</a></li>
 						<label class="switch">
 							<input type="checkbox">
@@ -276,6 +277,25 @@
 								</div>
 							</div>
 						</div>
+						@endforeach
+					</div>
+				</div>
+			</section>
+
+			<section class="colorlib-work" data-section="gallery">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<span class="heading-meta">My Gallery</span>
+							<h2 class="colorlib-heading animate-box">Gallery</h2>
+						</div>
+					</div>
+					<div class="row">
+						@foreach ($galeriData as $galeri)
+							<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+								<div class="project" style="background-image: url('{{ asset('foto/' . @$galeri->foto) }}');">
+								</div>
+							</div>
 						@endforeach
 					</div>
 				</div>

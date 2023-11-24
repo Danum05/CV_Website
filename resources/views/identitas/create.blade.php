@@ -15,6 +15,18 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <a href='{{ url("identitas") }}' class="btn btn-secondary"><< Kembali</a>
         <div class="mb-3 row">
+            <label for="user_id" class="col-sm-2 col-form-label">ID User</label>
+            <div class="col-sm-10">
+                <select class="form-select" name="user_id" id="user_id">
+                    @foreach ($UserData as $user)
+                        <option value="{{ $user->id }}" @if(Session::get('user_id') == $user->id) selected @endif>
+                            {{ $user->id }} - {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div> 
+        <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name='nama' value="{{ Session::get('nama') }}" id="nama">

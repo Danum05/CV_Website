@@ -36,6 +36,7 @@
                     <li class="nav-item"><a href="#education-section" class="nav-link"><span>Education</span></a></li>
 					<li class="nav-item"><a href="#organization-section" class="nav-link"><span>Organization</span></a></li>
 					<li class="nav-item"><a href="#portofolio-section" class="nav-link"><span>Portofolio</span></a></li>
+					<li class="nav-item"><a href="#gallery-section" class="nav-link"><span>Gallery</span></a></li>
 					<li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
 					<label class="nav-item switch">
 						<input type="checkbox">
@@ -294,6 +295,26 @@
 					</div>
 				</div>
                 @endforeach
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section ftco-project" id="gallery-section">
+		<div class="container-fluid px-md-4">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Gallery</span>
+					<h2 class="mb-4">My Gallery</h2>
+				</div>
+			</div>
+			<div class="row">
+				@foreach ($galeriData as $galeri)
+					<div class="col-md-3">
+						<div class="project img shadow ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('foto/' . @$galeri->foto) }}');">
+							<div class="overlay"></div>
+						</div>
+					</div>
+				@endforeach
 			</div>
 		</div>
 	</section>

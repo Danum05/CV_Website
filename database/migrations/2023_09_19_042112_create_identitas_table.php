@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('identitas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('nama');
             $table->string('pekerjaan');
             $table->string('tempat_lahir');
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->string('status');
             $table->string('pas_foto');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

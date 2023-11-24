@@ -76,6 +76,17 @@ p {
   margin-top: 0;
   margin-bottom: 1rem; }
 
+.navbar-nav .nav-item {
+  margin-right: -10px; /* Decrease the right margin */
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-item {
+      margin-bottom: 0px; 
+      margin-right: 0;
+  }
+}
+
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;

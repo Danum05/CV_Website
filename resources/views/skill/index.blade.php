@@ -1,4 +1,4 @@
-@extends('layout.template')
+@extends('layout_supermin.template')
 @section('konten')
 
 <div class="container my-3 p-3 bg-body rounded shadow-sm">

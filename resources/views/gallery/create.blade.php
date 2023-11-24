@@ -1,7 +1,7 @@
 @extends('layout.template')
 
 @section('konten')
-<form action='{{ url('gallery') }}' method='post' enctype="multipart/form-data">
+<form action='{{ url("gallery") }}' method='post' enctype="multipart/form-data">
     @csrf
     @if($errors->any())
     <div class="alert alert-danger">

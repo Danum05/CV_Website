@@ -88,9 +88,12 @@ class skillController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-public function show($id)
+public function show($identitas_id)
 {
-   //
+    $data = skill::where('identitas_id', $identitas_id)->get(); 
+    $identitas = identitas::find($identitas_id);
+
+    return view('skill.show')->with('data', $data)->with('identitas', $identitas);
 }
 
 /**

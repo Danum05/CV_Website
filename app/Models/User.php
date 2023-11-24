@@ -17,7 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    
+     public function identitas()
+    {
+        return $this->hasOne(Identitas::class);
+    }
+     
+     protected $fillable = [
         'name',
         'email',
         'password',
